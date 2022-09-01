@@ -1,0 +1,112 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.navbar {
+    display: flex;
+    align-items: baseline;
+    margin-top: 1rem;
+    padding: 1rem;
+    margin-left: 2%;
+}
+
+.logo {
+    width: 10vw;
+}
+
+.logo h2 {
+    display: inline;
+    font-size: 2rem;
+    color: #ea5d61;
+    transition: color .5s;
+
+}
+
+.logo h2:hover {
+    cursor: pointer;
+    color: #ea5d62c4;
+
+}
+
+.nav-links {
+    display: inline-flex;
+    width: 90vw;
+    padding-right: 5%;
+    justify-content: center;
+   
+}
+
+.nav-links ul li {
+    list-style: none;
+    display: inline-block;
+    padding-inline: 1rem;
+}
+
+.nav-links ul li a {
+    text-decoration: none;
+    color: #a2a1a3;
+    font-weight: 500;
+    border-bottom: none;
+    border-bottom-width: 0;
+    transition: color .5s, border-bottom 1s;
+}
+
+.nav-links ul li a:hover {
+    border-bottom: 1px solid #ea5d61;
+    color: black;
+}
+
+.landing-page-information {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* padding: 1rem; */
+    /* border: 1px solid black; */
+    padding: 4rem 5rem;
+}
+
+.landing-page-information h1 {
+    font-size: 3rem;
+    font-weight: normal;
+    /* border: 1px solid black; */
+    margin-right: auto;
+
+}
+
+.landing-page-information span {
+    color: #ea5d61;
+
+}
+
+.landing-page-information p {
+    margin-top: 1.5rem;
+    color: #a2a1a3;
+
+}
+
+.landing-page-information button {
+    padding: .5rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+    margin-right: auto;
+    margin-top: 1rem;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: #ea5d61;
+    transition: background-color 1s;
+}
+
+.landing-page-information button:hover {
+    background-color: #ea5d62d0;
+    cursor: pointer;
+}
+
+.landing-page {
+    display: grid;
+    grid-template-columns: repeat(2, 45vw);
+    justify-content: space-around;
+}
