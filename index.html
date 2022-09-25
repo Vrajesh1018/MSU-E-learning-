@@ -1,39 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>MSU E-learning plateform</title>
-  </head>
-  <body>
-    <div class="navbar">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>MSU E-learning plateform</title>
+  <script src="https://kit.fontawesome.com/28ea931677.js" crossorigin="anonymous"></script>
+
+  <!-- JQUERY CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <div class="container">
+
+    <div class="navbar"  onscroll="onScroll()">
       <div class="logo">
         <h2>Sinau.</h2>
       </div>
       <div class="nav-links">
         <ul>
           <li><a href="#">Home</a></li>
-          <li><a href="#">Service</a></li>
-          <li><a href="#">Courses</a></li>
-          <li><a href="#">Testimoni</a></li>
+          <li class="courses">
+            <a href="#">Courses</a>
+            <div class="courses-dropdown">
+              <ul>
+                <li><a href="#">CSE</a></li>
+                <li><a href="#">Electrical</a></li>
+                <li><a href="#">Civil</a></li>
+                <li><a href="#">Mechanical</a></li>
+                <li><a href="#">Chemical</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="courses"><a href="">Department</a>
+            <div class="courses-dropdown">
+              <ul>
+                <li><a href="#">BE-I</a></li>
+                <li><a href="#">BE-II</a></li>
+                <li><a href="#">BE-III</a></li>
+                <li><a href="#">BE-IV</a></li>
+              </ul>
+            </div>
+          </li>
+          <li><a href="#">About Us</a></li>
+          <li><button class="btn-2 signUp-button">Sign Up</button></li>
         </ul>
       </div>
     </div>
+
+
+
+
+
     <div class="landing-page">
       <div class="landing-page-information">
+
+        <!-- Pop-up for sign-in and sign-up -->
+        <div class="popup" id="popup">
+          <div class="popup-content">
+
+
+            <h3>Sign In</h3>
+            <img src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png" alt="Close"
+              class="close" id="close">
+
+
+            <div class="sign-in-control">
+              <input type="text" required>
+              <label for="" style="color: white;">Your Email</label>
+            </div>
+
+            <div class="sign-in-control">
+              <input type="password" required>
+              <label for="">Your password</label>
+            </div>
+
+            <button class="btn-signUp-popup">Submit</button>
+
+            <p style="color: rgb(106, 97, 97);">Don't have account ? <a href="#">create account</a></p>
+
+          </div>
+        </div>
+
+
+
         <h1>
           Investing in <br />
-          Knowledge and <br /><span>Your Future</span>
+          Knowledge and <br /><span style="color: #ea5d62d0;">Your Future</span>
         </h1>
         <p>
           With the help of E-Learning, create your own path and drive on your
           skills on your own to achieve what you seek
         </p>
-        <button>Enroll Now</button>
+
       </div>
       <div class="landing-page-img"><img src="images/img1.png" alt=""></div>
     </div>
-  </body>
+
+
+    <div class="features">
+      <div class="features-text">
+        <div class="features-text-div">
+          <h2>Why Choose</h2>
+          <span>E-learning</span>
+          <p>
+            Look into yourself, get something in return as your achievement.
+          </p>
+        </div>
+      </div>
+      <div class="features-details">
+        <div class="feature">
+          <img src="images/1.png" alt="" />
+          <h3>Course Accessibility</h3>
+          <p>Select a suitable course from the vast area of other courses.</p>
+        </div>
+        <div class="feature">
+          <img src="images/2.png" alt="" />
+          <h3>Schedule learning</h3>
+          <p>Learn at whatever and whenever at your suitable time and place.</p>
+        </div>
+        <div class="feature">
+          <img src="images/3.png" alt="" />
+          <h3>Expert Instructions</h3>
+          <p>Hold the opportunity to learn from the industry's expert.</p>
+        </div>
+        <div class="feature">
+          <img src="images/4.png" alt="" />
+          <h3>Scholarship</h3>
+          <p>
+            To encourage talent, we give up to 100% aid to those young learners.
+          </p>
+        </div>
+        <div class="feature">
+          <img src="images/5.png" alt="" />
+          <h3>Recorded sessions</h3>
+          <p>
+            Don't worry about it, access to every session on the chosen course.
+          </p>
+        </div>
+        <div class="feature">
+          <img src="images/6.png" alt="" />
+          <h3>Practical learning</h3>
+          <p>
+            Interact yourself with the real-world while doing the real-world
+            project.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="banner">
+      <div>
+        <h2>Are you ready to start your course now!</h2>
+      </div>
+      <button class="btn-1">Lets Get Started</button>
+      <button class="btn-2">Contact Us</button>
+    </div>
+
+    <footer>
+      <div class="address">
+        <h2>Sinau.</h2>
+        <p>1920 Holden Street San Deigo, CA 9389</p>
+        <p>Call us : 1-800-323-3829</p>
+        <p>
+          <i class="fa-brands fa-facebook-f"></i>&nbsp;&nbsp;
+          <i class="fa-brands fa-instagram"></i>&nbsp;&nbsp;
+          <i class="fa-brands fa-twitter"></i>&nbsp;&nbsp;
+        </p>
+      </div>
+      <div class="take-a-tour">
+        <h3>Take A Tour</h3>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Product</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="our-company">
+        <h3>Our Company</h3>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Media</a></li>
+          <li><a href="#">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="subscribe">
+        <h3>Subscribe</h3>
+        <p>Subscribe to get the latest news from us</p>
+        <input type="text" />
+      </div>
+    </footer>
+    <div class="copyright">
+      <p>Copyright © 2022. Crafted with love.</p>
+    </div>
+
+  </div>
+  <script src="index.js"></script>
+</body>
+
 </html>

@@ -1,3 +1,5 @@
+
+/* OM Bhatt  */
 * {
     margin: 0;
     padding: 0;
@@ -7,9 +9,11 @@
 .navbar {
     display: flex;
     align-items: baseline;
-    margin-top: 1rem;
     padding: 1rem;
-    margin-left: 2%;
+    padding-left: 4rem;
+    position: fixed;
+    top: 0;
+    /* background-color: #ea5d61; */
 }
 
 .logo {
@@ -26,58 +30,101 @@
 
 .logo h2:hover {
     cursor: pointer;
-    color: #ea5d62c4;
-
+    color: white;
 }
 
 .nav-links {
     display: inline-flex;
     width: 90vw;
-    padding-right: 5%;
     justify-content: center;
-   
+    /* padding-right: 5%; */
 }
+
+
 
 .nav-links ul li {
     list-style: none;
-    display: inline-block;
-    padding-inline: 1rem;
 }
 
-.nav-links ul li a {
+.nav-links>ul>li {
+    padding-inline: 1rem;
+    display: inline-block;
+
+}
+
+.nav-links ul li a,footer ul li a {
     text-decoration: none;
     color: #a2a1a3;
     font-weight: 500;
     border-bottom: none;
     border-bottom-width: 0;
-    transition: color .5s, border-bottom 1s;
+    transition: color .5s, border-bottom .5s;
+
+
 }
 
-.nav-links ul li a:hover {
+.nav-links>ul>li>a:hover {
     border-bottom: 1px solid #ea5d61;
     color: black;
 }
+
+/* Dropdown CSS */
+.courses-dropdown {
+    display: none;
+    position: absolute;
+    border: 1px solid black;
+    border-radius: .4rem;
+    margin-top: 0;
+    padding-top: 2rem;
+    /* margin-left: -1rem; */
+    background-color: white;
+    color: #ea5d61;
+
+}
+
+.courses-dropdown>ul>li {
+    line-height: 1.6;
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: white;
+    padding: .5rem 1rem;
+    cursor: pointer;
+}
+
+.courses-dropdown>ul>li:hover a {
+    color: black;
+    border-bottom: 1px solid #ea5d61;
+}
+
+
+.courses:hover .courses-dropdown {
+    display: block;
+}
+
+.department-dropdown{
+    display: none;
+}
+
+
 
 .landing-page-information {
     width: 70%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding: 1rem; */
-    /* border: 1px solid black; */
     padding: 4rem 5rem;
+   
 }
 
 .landing-page-information h1 {
     font-size: 3rem;
     font-weight: normal;
-    /* border: 1px solid black; */
     margin-right: auto;
 
 }
 
 .landing-page-information span {
-    color: #ea5d61;
+    color: white;
 
 }
 
@@ -96,7 +143,7 @@
     border: none;
     outline: none;
     color: white;
-    background-color: #ea5d61;
+    background-color: white;
     transition: background-color 1s;
 }
 
@@ -109,4 +156,300 @@
     display: grid;
     grid-template-columns: repeat(2, 45vw);
     justify-content: space-around;
+    margin-top: 7rem;
+}
+
+.landing-page-img img {
+    width: 80%;
+}
+
+/* Features CSS */
+.features {
+    line-height: 1.5;
+    display: grid;
+    /* grid-template-columns: 33vw 50vw; */
+    grid-template-columns: 30vw 54vw;
+    justify-content: center;
+    padding-block: 5rem;
+}
+
+.features p {
+    color: #919092;
+    font-weight: 500;
+    font-size: 1.1rem;
+
+}
+
+.features-text h2 {
+    font-size: 2.2rem;
+    font-weight: normal;
+}
+
+.features-text span {
+    color: #ea5d61;
+    font-size: 2.2rem;
+
+}
+
+.features-details {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    column-gap: 1rem;
+    row-gap: 2.5rem;
+
+}
+
+.features-text-div {
+    width: 50%;
+}
+
+
+/* Banner CSS */
+.banner {
+    background-color: #ea5d61;
+    font-size: 1.4rem;
+    font-weight: normal;
+    color: white;
+    width: 80vw;
+    height: 10rem;
+    display: flex;
+    margin: auto;
+    border-radius: .5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner div {
+    width: 43%;
+}
+
+
+.btn-1 {
+    -webkit-border-radius: 28;
+    -moz-border-radius: 28;
+    border-radius: 28px;
+    color: #ea5d61;
+    font-size: 20px;
+    background: #ffffff;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    margin-right: 1.5rem;
+}
+
+.btn-1:hover {
+    background: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btn-2 {
+    -webkit-border-radius: 22;
+    -moz-border-radius: 22;
+    border-radius: 22px;
+    color: #ffffff;
+    font-size: 20px;
+    background: #ea5d61;
+    padding: 10px 20px 10px 20px;
+    border: solid #ffffff 1px;
+    text-decoration: none;
+}
+
+.btn-2:hover {
+    background: #ea5d61;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/*  Sign-up pop-up  */
+
+
+.sign-up-btn {
+    padding: .5rem 1rem;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+    margin-right: auto;
+    margin-top: 1rem;
+    border: none;
+    outline: none;
+    color: #ea5d61;
+    background-color: white;
+    transition: background-color 1s;
+}
+
+.btn-signUp{
+    background-color: #ea5d62d0;
+    height: 35px;
+    color: white;
+    width: 100px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
+.btn-signUp:hover{
+    background-color: rgba(63, 60, 60, 0.6);
+}
+
+.popup{
+    background: rgba(54, 52, 52, 0.6);
+
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    position: fixed;
+    top: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content{
+    height: 15.525rem;
+    width: 31.25rem;
+    background: #ea5d62d0;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    position: relative;
+    padding: 2%;
+    text-align: center;
+    /* border: 4px solid  rgb(49, 53, 55); */
+}
+
+.popup-content a{
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+.popup-content>h3{
+    color: white;
+    margin: 1rem;
+}
+.close{
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background: #fff;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    box-shadow: 6px 6px 29px -4px rgba(0,0,0,0.75);
+    cursor: pointer;
+}
+
+.sign-up-input{
+  
+    padding: 1%;
+    margin: 2%;
+}
+
+
+.sign-in-control{
+
+    position: relative;
+    margin: 1rem 0 2.5rem;
+    width: 18.75rem;
+
+}
+
+.sign-in-control input{
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px #fff solid;
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    font-size: 1rem;
+    color: #fff;
+}
+
+.sign-in-control input:focus,
+.sign-in-control input:valid{
+    outline: 0;
+    border-bottom-color:white ;
+}
+
+.sign-in-control label{
+    position: absolute;
+    top: 1rem;
+    left: 0;
+    color: #fff;
+    pointer-events: none;
+}
+
+.sign-in-control label span{
+    display: inline-block;
+    font-size: 1.5rem;
+    min-width: 5px;
+    transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.sign-in-control input:focus + label span,
+.sign-in-control input:valid + label span{
+    color: white;
+    transform: translateY(-2rem);
+}
+
+
+.btn-signUp-popup{
+    background-color: white !important;
+    color: #ea5d61 !important;
+}
+
+
+/* Footer */
+
+footer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    line-height: 2.5;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+}
+
+footer p,
+footer ul li {
+    color: #919092;
+}
+
+footer h2 {
+    display: inline;
+    font-size: 2rem;
+    color: #ea5d61;
+}
+
+footer h3 {
+    font-weight: normal;
+}
+
+footer ul li {
+    list-style: none;
+}
+
+.copyright {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.copyright p {
+    color: #5a5a5a;
+
+}   
+
+/* scroll navbar */
+.scrolled{
+    background-color: #ea5d61 !important;
+    transition: background-color 200ms linear;
+}
+.scrolled h2{
+    color: white;
+}
+.scrolled a{
+    color: white !important;
 }
