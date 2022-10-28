@@ -25,8 +25,17 @@ labels.forEach((label) => {
 
 $(document).scroll(function () {
     
-    console.log('jnkjn');
     var $nav = $(".navbar");
     $nav.toggleClass('scrolled', $(this).scrollTop() > $nav.height());
+
+  });
+
+
+  $(document).ready(()=>{
+
+    $("#li-cse").on("click",()=>{
+
+        
+    });
 
   });

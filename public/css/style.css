@@ -134,7 +134,7 @@
 
 }
 
-.landing-page-information button {
+.landing-page-information button#submit-signUp {
     padding: .5rem 1rem;
     font-size: 1.1rem;
     border-radius: 1rem;
@@ -147,7 +147,7 @@
     transition: background-color 1s;
 }
 
-.landing-page-information button:hover {
+.landing-page-information button#submit-signUp:hover {
     background-color: #ea5d62d0;
     cursor: pointer;
 }
@@ -453,3 +453,14 @@ footer ul li {
 .scrolled a{
     color: white !important;
 }
+
+/* Link button */
+.link-button {
+    background: none;
+    border: none;
+    color: blue;
+    margin: 1%;
+    cursor: pointer;
+    font-size: 1em;
+    font-family: serif;
+  }

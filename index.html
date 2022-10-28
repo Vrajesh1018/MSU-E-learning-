@@ -5,7 +5,7 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="/css/style.css" />
   <title>MSU E-learning plateform</title>
   <script src="https://kit.fontawesome.com/28ea931677.js" crossorigin="anonymous"></script>
 
@@ -18,9 +18,9 @@
 
   <div class="container">
 
-    <div class="navbar"  onscroll="onScroll()">
+    <div class="navbar" onscroll="onScroll()">
       <div class="logo">
-        <h2>Sinau.</h2>
+        <h2>MSU</h2>
       </div>
       <div class="nav-links">
         <ul>
@@ -29,11 +29,12 @@
             <a href="#">Courses</a>
             <div class="courses-dropdown">
               <ul>
-                <li><a href="#">CSE</a></li>
-                <li><a href="#">Electrical</a></li>
-                <li><a href="#">Civil</a></li>
-                <li><a href="#">Mechanical</a></li>
-                <li><a href="#">Chemical</a></li>
+
+                <li><a href="/courses/cse" id="li-cse">CSE</a></li>
+                <li><a href="/courses/electrical" id="li-ele">Electrical</a></li>
+                <li><a href="/courses/civil" id="li-civil">Civil</a></li>
+                <li><a href="/courses/mechanical" id="li-mech">Mechanical</a></li>
+                <li><a href="/courses/chemical" id="li-chem">Chemical</a></li>
               </ul>
             </div>
           </li>
@@ -80,10 +81,15 @@
               <label for="">Your password</label>
             </div>
 
-            <button class="btn-signUp-popup">Submit</button>
+            <button class="btn-signUp-popup" id="submit-signUp">Submit</button>
 
-            <p style="color: rgb(106, 97, 97);">Don't have account ? <a href="#">create account</a></p>
+            <form method="get" action="/register" class="inline">
+              <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+              <button type="submit" name="submit_param" value="submit_value" class="link-button">
+                Don't have account ?
+              </button>
 
+            </form>
           </div>
         </div>
 
@@ -203,7 +209,7 @@
     </div>
 
   </div>
-  <script src="index.js"></script>
+  <script src="/Javascript/index.js"></script>
 </body>
 
 </html>
