@@ -68,6 +68,22 @@
     color: black;
 }
 
+.profile-btn {
+    /* display: none; */
+}
+
+.profile-btn>img {
+    width: 3rem;
+    height: 2.5rem;
+}
+
+.profile-dropdown {
+    /* display: none; */
+    border: 1px solid black;
+    border-radius: .4rem;
+
+}
+
 /* Dropdown CSS */
 .courses-dropdown {
     display: none;

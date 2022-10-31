@@ -48,7 +48,7 @@
               </ul>
             </div>
           </li>
-          <li><a href="#">About Us</a></li>
+          <li><a href="#aboutUs">About Us</a></li>
           <li><button class="btn-2 signUp-button">Sign Up</button></li>
         </ul>
       </div>
@@ -71,18 +71,20 @@
               class="close" id="close">
 
 
-            <div class="sign-in-control">
-              <input type="text" required>
-              <label for="" style="color: white;">Your Email</label>
-            </div>
+            <form action="/" method="post">
+              <div class="sign-in-control">
+                <input type="text" required name="emailSignIn">
+                <label for="" style="color: white;">Your Email</label>
+              </div>
 
-            <div class="sign-in-control">
-              <input type="password" required>
-              <label for="">Your password</label>
-            </div>
+              <div class="sign-in-control">
+                <input type="password" required name="passSignIn">
+                <label for="">Your password</label>
+              </div>
 
-            <button class="btn-signUp-popup" id="submit-signUp">Submit</button>
 
+              <button  type="submit" class="btn-signUp-popup" id="submit-signUp">Submit</button>
+            </form>
             <form method="get" action="/register" class="inline">
               <input type="hidden" name="extra_submit_param" value="extra_submit_value">
               <button type="submit" name="submit_param" value="submit_value" class="link-button">
@@ -169,7 +171,7 @@
       <button class="btn-2">Contact Us</button>
     </div>
 
-    <footer>
+    <footer id="aboutUs">
       <div class="address">
         <h2>Sinau.</h2>
         <p>1920 Holden Street San Deigo, CA 9389</p>

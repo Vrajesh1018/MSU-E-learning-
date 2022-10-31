@@ -27,7 +27,7 @@ const Student  = mongoose.model("student",studentSchema);
 
         Student.find({},(err,students)=>{
             if(!err){
-                console.log(students);
+                //console.log(students);
                 res.send(students);
             }
 
@@ -71,9 +71,43 @@ const Student  = mongoose.model("student",studentSchema);
 
     });
 
+    app.post("/api/foundOne",(req,res)=>{
+
+        const emailApi = req.body.email;
+        const passApi = req.body.pass;
+
+        console.log(req.body);
+        var isAuthenticate = false;
+
+        console.log("Hello I am from FoundOne !");
+
+        Student.findOne({Email : emailApi},(err,foundUser)=>{
+            if(!err){
+
+                console.log(foundUser);
+                if(foundUser.Password === passApi)
+                {
+
+                    isAuthenticate = true;
+                    //res.send("Hello I am from authetication");
+                    res.send(isAuthenticate);
+                }
+                else{
+                    isAuthenticate = false;
+                    res.send(isAuthenticate);
+
+                }
+            }
+        })
+
+
+
+    });
+
 
 
 
 app.listen(4000,()=>{
     console.log("Server has started on port 4000 for API");
 });
+

@@ -1,6 +1,8 @@
-document.querySelectorAll(".signUp-button")[0].addEventListener("click", function () {
-    document.getElementById("popup").style.display = "flex";
-});
+
+
+// document.querySelectorAll(".signUp-button")[0].addEventListener("click", function () {
+//     document.getElementById("popup").style.display = "flex";
+// });
 
 
 document.getElementById("close").addEventListener("click", function () {
@@ -35,6 +37,7 @@ $(document).scroll(function () {
 
     $("#li-cse").on("click",()=>{
 
+        
         
     });
 
