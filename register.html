@@ -26,13 +26,14 @@
         }
         .container {
             background-color: rgba(221, 17, 17, 0.598);
-            padding: 20px 40px;
+            padding: 25px 40px;
             border-radius: 5px;
-           
+            box-shadow: 5px -5px 73px 0px rgb(2, 48, 117) inset;
         }
         .container h1 {
             text-align: center;
-            /* margin-bottom: 10px; */
+            margin-bottom: 30px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
         }
         .container a {
             text-decoration: none;
@@ -60,7 +61,7 @@
         }
         .form-control {
             position: relative;
-            margin: 5px 0 10px; 
+            margin: 20px 0 10px; 
             width: 300px;
         }
         .form-control input {
@@ -93,13 +94,19 @@
         }
         .form-control input:focus + label span,
         .form-control input:valid+ label span {
-            color: lightblue;
+            color: rgb(232, 245, 249);
             transform: translateY(-30px);
+        }
+        body {
+            background-image: url("education-img");
+            background-repeat: no-repeat;
+            background-size: cover;
+            
         }
     </style>
 </head>
 
-<body>
+<body >
 
     <div class="container">
         <h1>Register</h1>
@@ -121,11 +128,12 @@
                 <label>Name</label>
             </div> 
             <button class="btn">Submit</button>
-            <p class="text">Don't have an account?
-                <a href="#">Create Account</a>
+            <p class="text" style="font-family: cursive;">Already Have an Account ?
+                <a href="#">Sign In</a>
             </p>
         </form>
     </div>
+    
     <script>
         const labels = document.querySelectorAll(".form-control label");
             labels.forEach((label) => {
