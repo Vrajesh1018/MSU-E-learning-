@@ -3,8 +3,7 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const axios = require("axios").default;
 const path = require("path");
-
-// const ejs = require("ejs");
+const courses = require("./Content/courses.js");
 
 const app = express();
 
@@ -23,11 +22,21 @@ app.get("/", (req, res) => {
   console.log(__dirname);
   //res.sendFile(__dirname + "/index.html");
 
-  res.render("home", {});
+    // console.log(__dirname);
+    //res.sendFile(__dirname + "/index.html");
 
-  //console.log(req);
+    console.log(courses);
+    
+    if(isAuthenticate)
+    res.render("login",{});
+    else
+    res.render("home",{});
 
-  //console.log(req.body.createAccount);
+
+
+    //console.log(req);
+
+    //console.log(req.body.createAccount);
 });
 
 app.post("/", (request, response) => {
@@ -63,9 +72,15 @@ app.post("/", (request, response) => {
 });
 
 // My Profile route
-app.get("/myprofile", (req, res) => {
-  if (isAuthenticate) res.send("My Profile .html banav bhai !");
-  else res.redirect("/");
+app.get("/myprofile",(req,res)=>{
+
+    if(isAuthenticate){
+
+        res.render("dashboard",{});
+        // res.send("My Profile .html banav bhai !");
+    }
+    else
+    res.redirect("/")
 });
 
 app.get("/logout", (req, res) => {
@@ -104,17 +119,37 @@ app.post("/register", (req, res) => {
 });
 
 // Courses Route
+// <<<<<<< HEAD
 app.get("/courses/:newCourse", (req, res) => {
   //console.log(req.params.newCourse);
   //console.log(__dirname);
 
   var newCourse = req.params.newCourse;
-  // var path = __dirname + "/public/courses/" + newCourse + ".html";
+    //    res.sendFile(path);
 
-  //console.log(path);
-  res.render(newCourse);
-  //res.send(req.params.newCourse);
+    courses.forEach(element => {
+        
+        
+    });
+
+    res.render(req.params.newCourse);
+
 });
+
+
+//Particular course Dashboard
+app.get("/courses/:newCourse/student/:particularCourse",(req,res)=>{
+
+    console.log(req.params);
+
+    res.render("Pcourse",{});
+    // res.send("Hii");
+
+
+
+});
+
+
 
 app.listen(3000, () => {
   console.log("server has started on port 3000");

@@ -478,12 +478,11 @@ footer ul li {
     cursor: pointer;
     font-size: 1em;
     font-family: serif;
-}
+  }
 
 
-/* courses CSS */
 
-
+/* hr CSS */
 hr.style-seven {
     overflow: visible;
     /* For IE */
@@ -505,41 +504,31 @@ hr.style-seven:before {
     border-width: 0 0 1px 0;
     border-radius: 20px;
 }
-
-.cards {
-    display: flex;
-    flex-direction: row;
-}
+/* card CSS */
 #careusel{
-    width:90%;
-    padding-top:1rem;
-    margin: auto;
+    width:85%;
+    margin:auto;
 }
+.cards{
 
-
+    padding:1rem;
+}
 .card {
-    margin-top: 1rem;
-    margin-right: 1rem;
+    -webkit-transform: perspective(1px) translateZ(0);
+    transform: perspective(1px) translateZ(0);
     display: flex;
-    width: 300px;
-    /* color: black; */
-    border-radius: .5rem;
-
-    /* margin: auto; */
-    /* justify-content: center;
-    align-items: center; */
+    position: relative;
+    width: fit-content;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
     background-color: #ea5d61;
     font-family: sans-serif;
     flex-direction: column;
     color: white;
-    
+    margin-right:1rem;
     line-height: 1.5;
-    -webkit-transform: perspective(1px) translateZ(0);
-    transform: perspective(1px) translateZ(0);
-}
-.slick-arrow,.slick-arrow:hover,.slick-arrow:focus{
-    background-color:#ea5d61;
-    border-radius: 50%;
+    
 }
 
 .card-content {
@@ -550,6 +539,7 @@ hr.style-seven:before {
     margin-top: .2rem;
     border-radius: .5rem;
 }
+
 
 
 
@@ -602,6 +592,7 @@ hr.style-seven:before {
 }
 
 
+
 .card:hover,
 .card:focus,
 .card:active {
@@ -624,7 +615,8 @@ hr.style-seven:before {
     box-shadow: 5px 15px 21px 5px rgba(0, 0, 0, 0.75);
 }
 
-
-
-
-
+/* slick CSS */
+.slick-arrow,.slick-arrow:hover,.slick-arrow:focus{
+    background-color: #ea5d61;
+    border-radius: 50%;
+}
