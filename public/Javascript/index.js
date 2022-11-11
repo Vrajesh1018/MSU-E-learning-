@@ -36,8 +36,6 @@ $(document).scroll(function () {
   $(document).ready(()=>{
 
     $("#li-cse").on("click",()=>{
-
-        
         
     });
 

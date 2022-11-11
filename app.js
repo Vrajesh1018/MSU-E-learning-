@@ -4,9 +4,7 @@ const ejs = require("ejs");
 const bodyParser = require("body-parser");
 const axios = require('axios').default;
 const path = require("path");
-
-// const ejs = require("ejs");
-
+const courses = require("./Content/courses.js");
 
 const app = express();
 
@@ -29,10 +27,16 @@ app.use(express.static("public"));
 // Home route
 app.get("/", (req, res) => {
 
-     console.log(__dirname);
+    // console.log(__dirname);
     //res.sendFile(__dirname + "/index.html");
 
+    console.log(courses);
+    
+    if(isAuthenticate)
+    res.render("login",{});
+    else
     res.render("home",{});
+
 
 
     //console.log(req);
@@ -85,8 +89,11 @@ app.post("/", (request, response) => {
 // My Profile route
 app.get("/myprofile",(req,res)=>{
 
-    if(isAuthenticate)
-    res.send("My Profile .html banav bhai !");
+    if(isAuthenticate){
+
+        res.render("dashboard",{});
+        // res.send("My Profile .html banav bhai !");
+    }
     else
     res.redirect("/")
 });
@@ -141,23 +148,36 @@ app.post("/register", (req, res) => {
 
 
 // Courses Route
-app.get("/courses/:newCourse", (req, res) => {
+app.get("/courses/:courseName", (req, res) => {
 
-
-    //console.log(req.params.newCourse);
-    //console.log(__dirname);
-
-    var newCourse = req.params.newCourse;
-    var path = __dirname + "/public/courses/" + newCourse + ".html";
+    var courseName = req.params.courseName;
+    // var path = __dirname + "/public/courses/" + newCourse + ".html";
 
     //console.log(path);
-    res.sendFile(path);
+    //    res.sendFile(path);
+
+    courses.forEach(element => {
+        
+        
+    });
+
     //res.send(req.params.newCourse);
 
+});
+
+
+//Particular course Dashboard
+app.get("/courses/:newCourse/student/:particularCourse",(req,res)=>{
+
+    console.log(req.params);
+
+    res.render("Pcourse",{});
+    // res.send("Hii");
 
 
 
 });
+
 
 
 
