@@ -1,0 +1,119 @@
+.navbar {
+  display: flex;
+  align-items: baseline;
+  padding: 1rem;
+  padding-left: 4rem;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  .logo {
+    width: 10vw;
+    h2 {
+      display: inline;
+      font-size: 2rem;
+      a {
+        text-decoration: none;
+        color: $primary-color;
+        transition: all 0.5s;
+        &:hover {
+          cursor: pointer;
+          color: rgba($color: $primary-color, $alpha: 0.6);
+        }
+      }
+    }
+  }
+  .nav-links {
+    display: inline-flex;
+    width: 90vw;
+    justify-content: center;
+  }
+  ul {
+    li {
+      list-style: none;
+      padding-inline: 1rem;
+      display: inline-block;
+      a {
+        text-decoration: none;
+        color: #a2a1a3;
+        font-weight: 500;
+        border-bottom: none;
+        border-bottom-width: 0;
+        transition: color 0.5s, border-bottom 0.5s;
+        &:hover {
+          border-bottom: 1px solid $primary-color;
+          color: black;
+        }
+      }
+    }
+  }
+  .profile-btn {
+    img {
+      width: 3rem;
+      height: 2.5rem;
+    }
+    .profile-dropdown {
+      border: 1px solid black;
+      border-radius: 0.4rem;
+    }
+  }
+  .courses {
+    .courses-dropdown {
+      display: none;
+      position: absolute;
+      border: 1px solid black;
+      border-radius: 0.4rem;
+      margin-top: 0;
+      z-index: 1;
+      padding-top: 2rem;
+      background-color: white;
+      color: $primary-color;
+      ul {
+        li {
+          line-height: 1.6;
+          font-size: 1.05rem;
+          font-weight: 300;
+          color: white;
+          padding: 0.5rem 1rem;
+          cursor: pointer;
+          &:hover {
+            a {
+              color: black;
+              border-bottom: 1px solid $primary-color;
+            }
+          }
+        }
+      }
+    }
+    &:hover {
+      .courses-dropdown {
+        display: block;
+      }
+    }
+  }
+  .department-dropdown {
+    display: none;
+  }
+  &.scrolled {
+    background-color: $primary-color !important;
+    transition: background-color 200ms linear;
+    h2 {
+      color: white;
+    }
+    a {
+      color: white !important;
+    }
+  }
+}
+
+// has to do for footer
+// .nav-links ul li a,
+// footer ul li a {
+//   text-decoration: none;
+//   color: #a2a1a3;
+//   font-weight: 500;
+//   border-bottom: none;
+//   border-bottom-width: 0;
+//   transition: color 0.5s, border-bottom 0.5s;
+// }
+
+/* Dropdown CSS */
