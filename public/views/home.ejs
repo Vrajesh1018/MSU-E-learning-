@@ -1,125 +1,123 @@
 <%-include('partials/header'); -%>
-    <%-include('partials/navbar'); -%>
+<%-include('partials/navbar'); -%>
+<section class="home-page">
+  <div class="landing-page">
+    <div class="landing-page-information">
 
-        <div class="landing-page">
-            <div class="landing-page-information">
-
-                <!-- Pop-up for sign-in and sign-up -->
-                <div class="popup" id="popup">
-                    <div class="popup-content">
-
-
-                        <h3>Sign In</h3>
-                        <img src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png"
-                            alt="Close" class="close" id="close">
+      <!-- Pop-up for sign-in and sign-up -->
+      <div class="popup" id="popup">
+        <div class="popup-content">
 
 
-                        <form action="/" method="post">
-                            <div class="sign-in-control">
-                                <input type="text" required name="emailSignIn">
-                                <label for="" style="color: white;">Your Email</label>
-                            </div>
-
-                            <div class="sign-in-control">
-                                <input type="password" required name="passSignIn">
-                                <label for="">Your password</label>
-                            </div>
+          <h3>Sign In</h3>
+          <img src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png" alt="Close" class="close" id="close">
 
 
-                            <button type="submit" class="btn-signUp-popup" id="submit-signUp">Submit</button>
-                        </form>
-                        <form method="get" action="/register" class="inline">
-                            <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                            <button type="submit" name="submit_param" value="submit_value" class="link-button">
-                                Don't have account ?
-                            </button>
-
-                        </form>
-                    </div>
-                </div>
-
-
-
-                <h1>
-                    Investing in <br />
-                    Knowledge and <br /><span style="color: #ea5d62d0;">Your Future</span>
-                </h1>
-                <p>
-                    With the help of E-Learning, create your own path and drive on your
-                    skills on your own to achieve what you seek
-                </p>
-
+          <form action="/" method="post">
+            <div class="sign-in-control">
+              <input type="text" required name="emailSignIn">
+              <label for="" style="color: white;">Your Email</label>
             </div>
-            <div class="landing-page-img"><img src="images/img1.png" alt=""></div>
+
+            <div class="sign-in-control">
+              <input type="password" required name="passSignIn">
+              <label for="">Your password</label>
+            </div>
+
+
+            <button type="submit" class="btn-signUp-popup" id="submit-signUp">Submit</button>
+          </form>
+          <form method="get" action="/register" class="inline">
+            <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+            <button type="submit" name="submit_param" value="submit_value" class="link-button">
+              Don't have account ?
+            </button>
+
+          </form>
         </div>
+      </div>
 
 
-        <div class="features">
-            <div class="features-text">
-                <div class="features-text-div">
-                    <h2>Why Choose</h2>
-                    <span>E-learning</span>
-                    <p>
-                        Look into yourself, get something in return as your achievement.
-                    </p>
-                </div>
-            </div>
-            <div class="features-details">
-                <div class="feature">
-                    <img src="images/1.png" alt="" />
-                    <h3>Course Accessibility</h3>
-                    <p>Select a suitable course from the vast area of other courses.</p>
-                </div>
-                <div class="feature">
-                    <img src="images/2.png" alt="" />
-                    <h3>Schedule learning</h3>
-                    <p>Learn at whatever and whenever at your suitable time and place.</p>
-                </div>
-                <div class="feature">
-                    <img src="images/3.png" alt="" />
-                    <h3>Expert Instructions</h3>
-                    <p>Hold the opportunity to learn from the industry's expert.</p>
-                </div>
-                <div class="feature">
-                    <img src="images/4.png" alt="" />
-                    <h3>Scholarship</h3>
-                    <p>
-                        To encourage talent, we give up to 100% aid to those young learners.
-                    </p>
-                </div>
-                <div class="feature">
-                    <img src="images/5.png" alt="" />
-                    <h3>Recorded sessions</h3>
-                    <p>
-                        Don't worry about it, access to every session on the chosen course.
-                    </p>
-                </div>
-                <div class="feature">
-                    <img src="images/6.png" alt="" />
-                    <h3>Practical learning</h3>
-                    <p>
-                        Interact yourself with the real-world while doing the real-world
-                        project.
-                    </p>
-                </div>
-            </div>
-        </div>
+
+      <h1>
+        Investing in <br />
+        Knowledge and <br /><span style="color: #ea5d62d0;">Your Future</span>
+      </h1>
+      <p>
+        With the help of E-Learning, create your own path and drive on your
+        skills on your own to achieve what you seek
+      </p>
+
+    </div>
+    <div class="landing-page-img"><img src="images/img1.png" alt=""></div>
+  </div>
 
 
-        <div class="banner">
-            <div>
-                <h2>Are you ready to start your course now!</h2>
-            </div>
-            <button class="btn-1">Lets Get Started</button>
-            <button class="btn-2">Contact Us</button>
-        </div>
+  <div class="features">
+    <div class="features-text">
+      <div class="features-text-div">
+        <h2>Why Choose</h2>
+        <span>E-learning</span>
+        <p>
+          Look into yourself, get something in return as your achievement.
+        </p>
+      </div>
+    </div>
+    <div class="features-details">
+      <div class="feature">
+        <img src="images/1.png" alt="" />
+        <h3>Course Accessibility</h3>
+        <p>Select a suitable course from the vast area of other courses.</p>
+      </div>
+      <div class="feature">
+        <img src="images/2.png" alt="" />
+        <h3>Schedule learning</h3>
+        <p>Learn at whatever and whenever at your suitable time and place.</p>
+      </div>
+      <div class="feature">
+        <img src="images/3.png" alt="" />
+        <h3>Expert Instructions</h3>
+        <p>Hold the opportunity to learn from the industry's expert.</p>
+      </div>
+      <div class="feature">
+        <img src="images/4.png" alt="" />
+        <h3>Scholarship</h3>
+        <p>
+          To encourage talent, we give up to 100% aid to those young learners.
+        </p>
+      </div>
+      <div class="feature">
+        <img src="images/5.png" alt="" />
+        <h3>Recorded sessions</h3>
+        <p>
+          Don't worry about it, access to every session on the chosen course.
+        </p>
+      </div>
+      <div class="feature">
+        <img src="images/6.png" alt="" />
+        <h3>Practical learning</h3>
+        <p>
+          Interact yourself with the real-world while doing the real-world
+          project.
+        </p>
+      </div>
+    </div>
+  </div>
 
-        <script>
 
-            document.querySelectorAll(".signUp-button")[0].addEventListener("click", function () {
-                document.getElementById("popup").style.display = "flex";
-            });
-        </script>
+  <div class="banner">
+    <div>
+      <h2>Are you ready to start your course now!</h2>
+    </div>
+    <button class="btn-1">Lets Get Started</button>
+    <button class="btn-2">Contact Us</button>
+  </div>
 
+  <script>
+    document.querySelectorAll(".signUp-button")[0].addEventListener("click", function() {
+      document.getElementById("popup").style.display = "flex";
+    });
+  </script>
 
-        <%-include('partials/footer'); -%>
+</section>
+<%-include('partials/footer'); -%>

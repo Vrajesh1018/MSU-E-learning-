@@ -87,7 +87,7 @@ footer ul li a {
     border: 1px solid black;
     border-radius: .4rem;
     margin-top: 0;
-    z-index: 999;
+    z-index: 1;
     padding-top: 2rem;
     background-color: white;
     color: #ea5d61;
@@ -478,7 +478,7 @@ footer ul li {
     cursor: pointer;
     font-size: 1em;
     font-family: serif;
-  }
+}
 
 
 
@@ -504,15 +504,18 @@ hr.style-seven:before {
     border-width: 0 0 1px 0;
     border-radius: 20px;
 }
-/* card CSS */
-#careusel{
-    width:85%;
-    margin:auto;
-}
-.cards{
 
-    padding:1rem;
+/* card CSS */
+#careusel {
+    width: 85%;
+    margin: auto;
 }
+
+.cards {
+
+    padding: 1rem;
+}
+
 .card {
     -webkit-transform: perspective(1px) translateZ(0);
     transform: perspective(1px) translateZ(0);
@@ -526,9 +529,9 @@ hr.style-seven:before {
     font-family: sans-serif;
     flex-direction: column;
     color: white;
-    margin-right:1rem;
+    margin-right: 1rem;
     line-height: 1.5;
-    
+
 }
 
 .card-content {
@@ -616,7 +619,9 @@ hr.style-seven:before {
 }
 
 /* slick CSS */
-.slick-arrow,.slick-arrow:hover,.slick-arrow:focus{
+.slick-arrow,
+.slick-arrow:hover,
+.slick-arrow:focus {
     background-color: #ea5d61;
     border-radius: 50%;
 }
