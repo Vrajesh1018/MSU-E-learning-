@@ -1,6 +1,6 @@
 
 <%- include('partials/header') -%>
-<%- include('partials/loginNavbar') -%>
+<%- include('partials/navbar') -%>
 
 
 
@@ -8,6 +8,22 @@
 
     <div class="view">
          
+        <% itemsArray.forEach((ele)=>{ %>
+
+            <form action="/video" method="post">
+
+                <a href="">
+                    <div>
+                        <h1>
+                            <%= ele.snippet.title %>
+                        </h1>
+                    </div>
+                </a>
+                <input type="hidden" name="extra_submit_param" value="<%=  ele.snippet.resourceId.videoId %>">
+                <button type="submit" name="submit_param" value="submit_value">Play</button>
+            </form>
+
+            <% }) %>
 
 
 

@@ -2,19 +2,23 @@
 //     document.getElementById("popup").style.display = "flex";
 // });
 
-// document.getElementById("close").addEventListener("click", function () {
-//   document.getElementById("popup").style.display = "none";
-//   console.log("Hello");
-// });
+$(".cards").slick({
+  arrows: true,
+  dots: true,
+  infinite: true,
+  slidesToShow: 4,
+  slidesToScroll: 4,
+});
 
 
-  $(".cards").slick({
-    arrows: true,
-    dots:true,
-    infinite:true,
-    slidesToShow: 4,
-    slidesToScroll: 4,
-  });
+// BUG close button is not working
+// if (!document.getElementById("close")) {
+//   document.getElementById("close").addEventListener("click", function () {
+//     document.getElementById("popup").style.display = "none";
+//     console.log("Hello");
+//   })
+// };
+
 
 const labels = document.querySelectorAll(".sign-in-control label");
 
