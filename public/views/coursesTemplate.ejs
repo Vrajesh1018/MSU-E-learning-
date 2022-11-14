@@ -1,0 +1,35 @@
+<%-include('partials/header'); -%> <%-include('partials/navbar'); -%>
+
+
+<% courseArr.forEach((ele)=>{ %>
+
+  <section class="careusel-cse">
+
+    <center><h1><%= ele.domain %></h1></center>
+  
+  <hr class="style-seven">
+  
+  <div class="cards">
+  
+    <% ele.cardlist.forEach((e)=>{ %>
+
+      <div class="card">
+        <img src="https://picsum.photos/200" alt="thumbnail" />
+        <h2><%= e.cardTitle %></h2>
+        <div class="card-content">
+          <p>
+           <%= e.desc %>
+          </p>
+          <h3><%= e.author %></h3>
+          <a href="/courses/<%= courseName %>/pcourse/<%= ele.itemid %>/student/<%= e.cardId %>"><button class="btn-1" >Explore</button></a>
+        </div>
+      </div>
+   <% }); %>
+    
+  </div>
+  
+  </section>
+  
+<% }); %>
+
+<%-include('partials/footer'); -%>

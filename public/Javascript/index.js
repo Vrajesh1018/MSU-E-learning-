@@ -1,3 +1,7 @@
+// document.querySelectorAll(".signUp-button")[0].addEventListener("click", function () {
+//     document.getElementById("popup").style.display = "flex";
+// });
+
 $(".cards").slick({
   arrows: true,
   dots: true,
@@ -5,20 +9,16 @@ $(".cards").slick({
   slidesToShow: 4,
   slidesToScroll: 4,
 });
-$(document).scroll(function () {
-  var $nav = $(".navbar");
-  $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
-});
-document
-  .querySelectorAll(".signUp-button")[0]
-  .addEventListener("click", function () {
-    document.getElementById("popup").style.display = "flex";
-  });
 
-document.getElementById("close").addEventListener("click", function () {
-  document.getElementById("popup").style.display = "none";
-  console.log("Hello");
-});
+
+// BUG close button is not working
+// if (!document.getElementById("close")) {
+//   document.getElementById("close").addEventListener("click", function () {
+//     document.getElementById("popup").style.display = "none";
+//     console.log("Hello");
+//   })
+// };
+
 
 const labels = document.querySelectorAll(".sign-in-control label");
 
@@ -33,3 +33,11 @@ labels.forEach((label) => {
 });
 
 // On scroll the color of navbar change
+
+$(document).scroll(function () {
+  var $nav = $(".navbar");
+  $nav.toggleClass("scrolled", $(this).scrollTop() > $nav.height());
+});
+
+
+

@@ -12,6 +12,7 @@
     padding: 1rem;
     padding-left: 4rem;
     position: sticky;
+    z-index: 1;
     top: 0;
     /* background-color: #ea5d61; */
 }
@@ -506,11 +507,10 @@ hr.style-seven:before {
 }
 
 /* card CSS */
-#careusel {
-    width: 85%;
-    margin: auto;
+.careusel-cse{
+    width:85%;
+    margin:auto;
 }
-
 .cards {
 
     padding: 1rem;
