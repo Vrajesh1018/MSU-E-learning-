@@ -12,14 +12,17 @@ $(".cards").slick({
   slidesToShow: 4,
   slidesToScroll: 4,
 });
+document
+  .querySelectorAll(".signUp-button")[0]
+  .addEventListener("click", function () {
+    document.getElementById("popup").style.display = "flex";
+  });
 
-
- // BUG close button is not working
-  //   document.getElementById("close").addEventListener("click", function () {
-  //   document.getElementById("popup").style.display = "none";
-  //   console.log("Hello");
-  // });
-
+// BUG close button is not working
+document.getElementById("close").addEventListener("click", function () {
+  document.getElementById("popup").style.display = "none";
+  console.log("Hello");
+});
 
 const labels = document.querySelectorAll(".sign-in-control label");
 

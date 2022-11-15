@@ -139,10 +139,10 @@
   background-color: #ea5d61 !important;
   transition: background-color 200ms linear;
 }
-.navbar.scrolled h2 {
-  color: white;
+.navbar.scrolled h2 > a {
+  color: white !important;
 }
-.navbar.scrolled a {
+.navbar.scrolled .nav-links-ul > li > a {
   color: white !important;
 }
 
@@ -159,14 +159,12 @@
   justify-content: space-around;
   margin-top: 7rem;
 }
-.home-page .landing-page .landing-page-information {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 4rem 5rem;
+.nav-links-ul > li a:hover {
+  border-bottom: 1px solid #ea5d61;
+  color: black;
 }
-.home-page .landing-page .landing-page-information .popup {
+
+.popup {
   background: rgba(54, 52, 52, 0.6);
   width: 100%;
   height: 100%;
@@ -177,8 +175,9 @@
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content {
+.popup .popup-content {
   height: 15.525rem;
   width: 31.25rem;
   background: rgba(234, 93, 98, 0.8156862745);
@@ -189,7 +188,7 @@
   padding: 2%;
   text-align: center;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .link-button {
+.popup .popup-content .link-button {
   background: none;
   border: none;
   color: blue;
@@ -198,33 +197,33 @@
   font-size: 1em;
   font-family: serif;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content a {
+.popup .popup-content a {
   text-decoration: none;
   color: blanchedalmond;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content h3 {
+.popup .popup-content h3 {
   color: white;
   margin: 1rem;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .sign-in-control {
+.popup .popup-content .sign-in-control {
   position: relative;
   margin: 1rem 0 2.5rem;
   width: 18.75rem;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .sign-in-control label {
+.popup .popup-content .sign-in-control label {
   position: absolute;
   top: 1rem;
   left: 0;
   color: #fff;
   pointer-events: none;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .sign-in-control label span {
+.popup .popup-content .sign-in-control label span {
   display: inline-block;
   font-size: 1.5rem;
   min-width: 5px;
   transition: 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .sign-in-control input {
+.popup .popup-content .sign-in-control input {
   background-color: transparent;
   border: 0;
   border-bottom: 2px #fff solid;
@@ -234,15 +233,15 @@
   font-size: 1rem;
   color: #fff;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .sign-in-control input:focus, .home-page .landing-page .landing-page-information .popup .popup-content .sign-in-control input:valid {
+.popup .popup-content .sign-in-control input:focus, .popup .popup-content .sign-in-control input:valid {
   outline: 0;
   border-bottom-color: white;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .btn-signUp-popup {
+.popup .popup-content .btn-signUp-popup {
   background-color: white !important;
   color: #ea5d61 !important;
 }
-.home-page .landing-page .landing-page-information .popup .popup-content .close {
+.popup .popup-content .close {
   position: absolute;
   top: -15px;
   right: -15px;
@@ -252,6 +251,21 @@
   border-radius: 50%;
   box-shadow: 6px 6px 29px -4px rgba(0, 0, 0, 0.75);
   cursor: pointer;
+}
+
+/* Dropdown CSS */
+.home-page .landing-page {
+  display: grid;
+  grid-template-columns: repeat(2, 45vw);
+  justify-content: space-around;
+  margin-top: 7rem;
+}
+.home-page .landing-page .landing-page-information {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4rem 5rem;
 }
 .home-page .landing-page .landing-page-information h1 {
   font-size: 3rem;
@@ -516,4 +530,122 @@ footer a {
 .slick-arrow:hover, .slick-arrow:focus, .slick-arrow {
   background-color: #ea5d61;
   border-radius: 50%;
-}/*# sourceMappingURL=main.css.map */
+}
+
+.container-pcourse {
+  display: grid;
+  padding: 3rem;
+  width: calc(100vw - 2rem);
+  height: 100vh;
+  grid-template-columns: 70% 30%;
+  justify-content: center;
+  gap: 1rem;
+}
+.container-pcourse .container-listOfVideos {
+  overflow-y: scroll;
+}
+.container-pcourse .container-listOfVideos a {
+  text-decoration: none;
+}
+.container-pcourse .container-listOfVideos button {
+  border: none;
+  padding: 0.5rem;
+  line-height: 1.5;
+  font-size: 1.2rem;
+  font-weight: normal;
+  margin-bottom: 1rem;
+  text-align: left;
+  cursor: default;
+}
+.container-pcourse .container-listOfVideos button h3:hover {
+  cursor: pointer;
+}
+.container-pcourse .container-description h2 {
+  text-decoration: underline;
+}
+.container-pcourse .container-description h3 {
+  font-weight: 400 !important;
+}
+
+/*   Dahsboard Styles */
+.dashboard-container {
+  display: flex;
+}
+
+.side-nav {
+  border-right: 2px solid gray;
+  margin: 4rem;
+  width: 20%;
+}
+
+.side-nav > div {
+  margin: 5rem;
+}
+
+.side-nav-item > a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  border-bottom: none;
+  border-bottom-width: 0;
+  transition: color 0.5s, border-bottom 0.5s;
+}
+
+.analytics-dashboard {
+  padding: 5rem;
+  text-align: center;
+  width: 80%;
+}
+
+.analytics-heading {
+  /* margin-left: 2rem; */
+}
+
+.dashboard-content-item-1 {
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+}
+
+.item-d {
+  margin: 2rem;
+  border: 1px solid gray;
+  padding: 2rem;
+}
+
+.item-d > p {
+  margin: 0.5rem;
+}
+
+.enroll-class {
+  margin: 2rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: space-around;
+  text-align: start;
+  border-left: 3px solid #b52863;
+}
+
+.enroll-class:hover {
+  background-color: #eaf0f0;
+}
+
+.btn-dashboard {
+  background: #f711a3;
+  background-image: linear-gradient(to bottom, #f711a3, #b52863);
+  border-radius: 14px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 12px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn-dashboard:hover {
+  background: #f788b0;
+  background-image: linear-gradient(to bottom, #f788b0, #d649a5);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Styles for particular course when student clicks on GO TO course *//*# sourceMappingURL=main.css.map */

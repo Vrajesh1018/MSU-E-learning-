@@ -1,57 +1,37 @@
-<%- include('partials/header'); -%>
-<%- include('partials/loginNavbar') -%>
-
-<!-- <div class="navbar" onscroll="onScroll()">
-  <div class="logo">
-    <h2>MSU</h2>
-  </div>
-  <div class="nav-links">
-    <ul>
-      <li><a href="/">Home</a></li>
-      <li class="courses">
-        <a href="#">Courses</a>
-        <div class="courses-dropdown">
-          <ul>
-            <li><a href="/courses/cse" id="li-cse">CSE</a></li>
-            <li><a href="/courses/electrical" id="li-ele">Electrical</a></li>
-            <li><a href="/courses/civil" id="li-civil">Civil</a></li>
-            <li><a href="/courses/mechanical" id="li-mech">Mechanical</a></li>
-            <li><a href="/courses/chemical" id="li-chem">Chemical</a></li>
-          </ul>
-        </div>
-      </li>
-      <li class="courses">
-        <a href="">Department</a>
-        <div class="courses-dropdown">
-          <ul>
-            <li><a href="#">BE-I</a></li>
-            <li><a href="#">BE-II</a></li>
-            <li><a href="#">BE-III</a></li>
-            <li><a href="#">BE-IV</a></li>
-          </ul>
-        </div>
-      </li>
-      <li><a href="#aboutUs">About Us</a></li>
-      <li>
-        <div class="profile-btn" id="profileBtn">
-          <img src="/images/icons8-male-user-64.png" />
-          <div class="profile-dropdown">
-            <ul>
-              <li><a href="/myprofile"> My Account</a></li>
-              <li><a href="/logout">Log Out</a></li>
-            </ul>
-          </div>
-        </div>
-      </li>
-    </ul>
-  </div>
-</div> -->
+<%-include('partials/header'); -%>
+<%- include('partials/loginNavbar');%>
 
 <div class="landing-page">
   <div class="landing-page-information">
     <!-- Pop-up for sign-in and sign-up -->
-    <%-include('partials/popup') -%>
+    <div class="popup" id="popup">
+      <div class="popup-content">
+        <h3>Sign In</h3>
+        <img src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png" alt="Close" class="close" id="close" />
 
+        <form action="/" method="post">
+          <div class="sign-in-control">
+            <input type="text" required name="emailSignIn" />
+            <label for="" style="color: white">Your Email</label>
+          </div>
+
+          <div class="sign-in-control">
+            <input type="password" required name="passSignIn" />
+            <label for="">Your password</label>
+          </div>
+
+          <button type="submit" class="btn-signUp-popup" id="submit-signUp">
+            Submit
+          </button>
+        </form>
+        <form method="get" action="/register" class="inline">
+          <input type="hidden" name="extra_submit_param" value="extra_submit_value" />
+          <button type="submit" name="submit_param" value="submit_value" class="link-button">
+            Don't have account ?
+          </button>
+        </form>
+      </div>
+    </div>
 
     <h1>
       Investing in <br />

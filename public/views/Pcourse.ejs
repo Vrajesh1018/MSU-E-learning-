@@ -1,4 +1,3 @@
-
 <%- include('partials/header') -%>
 <%- include('partials/navbar') -%>
 
@@ -6,27 +5,45 @@
 
 <div class="container-pcourse">
 
-    <div class="view">
-         
-        <% itemsArray.forEach((ele)=>{ %>
+  <div class="container-iframe">
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/<%= videoId %>" title="YouTube video player" frameborder="0" allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  <div class="container-listOfVideos">
 
-            <form action="/courses/<%= courseName%>/pcourse/<%= itemId%>/student/<%= courseId%>" method="post">
 
-                <a href="">
-                    <div>
-                        <h1>
-                            <%= ele.snippet.title %>
-                        </h1>
-                    </div>
-                </a>
-                <input type="hidden" name="extra_submit_param" value="<%=  ele.snippet.resourceId.videoId %>">
-                <button type="submit" name="submit_param" value="submit_value">Play</button>
-            </form>
+    <% itemsArray.forEach((ele)=>{ %>
 
-            <% }); %>
-    </div>
-    <div class="list-videos"></div>
+    <form action="/courses/<%= courseName %>/pcourse/<%= itemId %>/student/<%= courseId %>" method="post">
+
+      <a href="">
+        <div>
+          <button type="submit">
+            <h3>
+              <%= ele.snippet.title %>
+            </h3>
+          </button>
+        </div>
+      </a>
+      <input type="hidden" name="extra_submit_param_videoId" value="<%=  ele.snippet.resourceId.videoId %>">
+      <input type="hidden" name="extra_submit_param_courseName" value="<%=  courseName %>">
+      <input type="hidden" name="extra_submit_param_courseId" value="<%=  courseId %>">
+      <!-- <button type="submit" name="submit_param" value="submit_value">Play</button> -->
+    </form>
+
+
+    <% }) %>
+
+
+
+  </div>
+  <div class="container-description">
+    <h2>Description</h2>
+
+    <h3>Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero eos, sunt sit, dolore soluta in minima, nam repellendus error reiciendis illo iste atque facere tempora quod inventore magni alias recusandae? Cupiditate quo repellendus perspiciatis quod provident veniam autem, facilis repudiandae, odit quasi laudantium in eos? Laudantium architecto cupiditate non exercitationem!</h3>
+  </div>
 </div>
+
+
 
 
 
