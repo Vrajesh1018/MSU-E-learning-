@@ -3,7 +3,7 @@
     <h2><a href="/">MSU</a></h2>
   </div>
   <div class="nav-links">
-    <ul>
+    <ul class="nav-links-ul">
       <li><a href="/">Home</a></li>
       <li class="courses">
         <a href="/">Courses</a>
@@ -31,5 +31,38 @@
       <li><a href="#aboutUs">About Us</a></li>
       <li><button class="btn-2 signUp-button">Sign In</button></li>
     </ul>
+  </div>
+</div>
+
+<!-- Pop-up for sign-in and sign-up -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+
+
+    <h3>Sign In</h3>
+    <a href="#!"><img src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png" alt="Close" class="close" id="close"></a>
+
+
+    <form action="/" method="post">
+      <div class="sign-in-control">
+        <input type="text" required name="emailSignIn">
+        <label for="" style="color: white;">Your Email</label>
+      </div>
+
+      <div class="sign-in-control">
+        <input type="password" required name="passSignIn">
+        <label for="">Your password</label>
+      </div>
+
+
+      <button type="submit" class="btn-signUp-popup" id="submit-signUp">Submit</button>
+    </form>
+    <form method="get" action="/register" class="inline">
+      <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+      <button type="submit" name="submit_param" value="submit_value" class="link-button">
+        Don't have account ?
+      </button>
+
+    </form>
   </div>
 </div>

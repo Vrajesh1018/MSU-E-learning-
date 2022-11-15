@@ -19,11 +19,6 @@ app.set("views", path.join(__dirname, "public/views"));
 
 app.use(express.static("public"));
 
-
-
-
-
-
 // Home route
 app.get("/", (req, res) => {
   console.log(__dirname);
@@ -34,18 +29,13 @@ app.get("/", (req, res) => {
 
   //console.log(courses);
 
-  if (isAuthenticate)
-    res.render("login", {});
-  else
-    res.render("home", {});
-
-
+  if (isAuthenticate) res.render("login", {});
+  else res.render("home", {});
 
   //console.log(req);
 
   //console.log(req.body.createAccount);
 });
-
 
 app.post("/", (request, response) => {
   const email = request.body.emailSignIn;
@@ -79,36 +69,23 @@ app.post("/", (request, response) => {
     });
 });
 
-
-
-
 // My Profile route
 app.get("/myprofile", (req, res) => {
-
   if (isAuthenticate) {
-
     res.render("dashboard", {});
     // res.send("My Profile .html banav bhai !");
-  }
-  else
-    res.redirect("/")
+  } else res.redirect("/");
 });
-
-
 
 app.get("/logout", (req, res) => {
   isAuthenticate = false;
   res.redirect("/");
 });
 
-
-
 // Register Route
 app.get("/register", (req, res) => {
   res.sendFile(__dirname + "/register.html");
 });
-
-
 
 app.post("/register", (req, res) => {
   console.log("Hii I Am in /register post ..");
@@ -135,13 +112,9 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
-
-
 // Courses Route
 // <<<<<<< HEAD
 app.get("/courses/:newCourse", (req, res) => {
-
-
   var newCourse = req.params.newCourse;
   //    res.sendFile(path);
 
@@ -149,93 +122,71 @@ app.get("/courses/:newCourse", (req, res) => {
   console.log("Value of new Course is : " + newCourse);
 
   courses.forEach((element) => {
-
     console.log(element.courseName);
 
     // string1.localeCompare(string2) == if both are equal then returns 0 and if if they are equal then add courses.items to it.
     if (!element.courseName.localeCompare(newCourse))
       courseDetails = element.items;
-
   });
 
   //console.log(courseDetails);
 
-  res.render("coursesTemplate", { courseArr: courseDetails, courseName: newCourse });
-
+  res.render("coursesTemplate", {
+    courseArr: courseDetails,
+    courseName: newCourse,
+  });
 });
-
-
 
 //Particular course Dashboard
 app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
-
-
   var courseName = req.params.newCourse;
   var courseId = req.params.courseId;
   var itemId = req.params.itemId;
 
   var jsonObjectBody = "";
 
-
-  var playlistId = ""
+  var playlistId = "";
 
   courses.forEach((ele) => {
-
     // This means we find the object of particular course ex. CSE.
     if (!ele.courseName.localeCompare(courseName)) {
-
       ele.items.forEach((e) => {
-
-
         // That means we got is it of which domain
         if (e.itemid == itemId) {
-
           e.cardlist.forEach((element) => {
-
             if (element.cardId == courseId) {
-
               // here we get the exact object of carList which contain details;
               playlistId = element.playlistId;
 
               console.log(element);
             }
-
-          })
-
+          });
         }
-
-
       });
-
-
-
     }
-
   });
-
 
   //console.log(playlistId);
 
-  var playlistURL = "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" + playlistId + "&key=" + process.env.API_KEY;
-
+  var playlistURL =
+    "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
+    playlistId +
+    "&key=" +
+    process.env.API_KEY;
 
   https.get(playlistURL, (response) => {
-
-    //Intialise our JSON object 
-     jsonObjectBody = "";
-
+    //Intialise our JSON object
+    jsonObjectBody = "";
 
     response.on("data", (chunk) => {
       jsonObjectBody += chunk;
     });
 
-
     response.on("end", () => {
       var jsonObject = JSON.parse(jsonObjectBody);
 
-      // It's working correctly 
-      // console.log(jsonObject);
-
+      // It's working correctly
+      // console.log(jsonObject.items[0]);
 
       // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
       var nextPageToken = jsonObject.nextPageToken;
@@ -248,34 +199,34 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
         //console.log(jsonObject.items[i].snippet.title);
       }
 
-
-      res.render("Pcourse", { itemsArray: jsonObject.items });
-
+      res.render("Pcourse", {
+        videoId: jsonObject.items[0].snippet.resourceId.videoId,
+        itemsArray: jsonObject.items,
+        courseName: courseName,
+        courseId: courseId,
+        itemId: itemId,
+      });
     });
-
   });
-
 });
 
-
-
-
-// Route for video play 
+// Route for video play
 app.post("/video", (req, res) => {
   //console.log(req.body);
-
-  var iframeHtml = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/` + req.body.extra_submit_param + `"
-  title="YouTube video player" frameborder="0"
-  allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen></iframe>`;
-
-
-  res.send(iframeHtml);
-
-
 });
 
-
+app.post("/courses/:courseId/pcourse/:itemId/student/:courseId", (req, res) => {
+  let videoId = req.body.exptra_submit_param_videoId;
+  let courseName = req.body.exptra_submit_param_courseName;
+  let courseId = req.body.exptra_submit_param_courseId;
+  res.render("Pcourse", {
+    videoId: videoId,
+    itemsArray: jsonObject.items,
+    courseName: courseName,
+    courseId: courseId,
+    itemId: itemId,
+  });
+});
 app.listen(3000, () => {
   console.log("server has started on port 3000");
 });
