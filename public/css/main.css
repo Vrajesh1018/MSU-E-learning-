@@ -80,6 +80,12 @@
   padding-inline: 1rem;
   display: inline-block;
 }
+
+/* Bug solved . */
+.nav-links-dropdown-ul li{
+  display: block !important;
+}
+
 .navbar ul li a {
   text-decoration: none;
   color: #a2a1a3;
@@ -139,6 +145,12 @@
 .navbar.scrolled a {
   color: white !important;
 }
+
+/* Bug 2 solved !! */
+.navbar.scrolled .nav-links-dropdown-ul a{
+  color: gray !important; 
+}
+
 
 /* Dropdown CSS */
 .home-page .landing-page {
@@ -431,14 +443,14 @@ footer a {
     transform: translateY(-8px);
   }
 }
-#careusel {
+.careusel-cse {
   width: 85%;
   margin: auto;
 }
-#careusel .cards {
+.careusel-cse .cards {
   padding: 1rem;
 }
-#careusel .cards .card {
+.careusel-cse .cards .card {
   transform: perspective(1px) translateZ(0);
   display: flex;
   position: relative;
@@ -455,11 +467,11 @@ footer a {
   margin-right: 1rem;
   line-height: 1.5;
 }
-#careusel .cards .card img {
+.careusel-cse .cards .card img {
   margin-top: 0.2rem;
   border-radius: 0.5rem;
 }
-#careusel .cards .card:hover, #careusel .cards .card:focus, #careusel .cards .card:active {
+.careusel-cse .cards .card:hover, .careusel-cse .cards .card:focus, .careusel-cse .cards .card:active {
   -webkit-animation-name: hvr-bob-float, hvr-bob;
   animation-name: hvr-bob-float, hvr-bob;
   -webkit-animation-duration: 0.3s, 1.5s;
@@ -476,10 +488,10 @@ footer a {
   animation-direction: normal, alternate;
   box-shadow: 5px 15px 21px 5px rgba(0, 0, 0, 0.75);
 }
-#careusel .cards .card .card-content {
+.careusel-cse .cards .card .card-content {
   margin-left: 0.2rem;
 }
-#careusel hr.style-seven {
+.careusel-cse hr.style-seven {
   overflow: visible;
   /* For IE */
   height: 30px;
@@ -488,7 +500,7 @@ footer a {
   border-width: 1px 0 0 0;
   border-radius: 20px;
 }
-#careusel hr.style-seven:before {
+.careusel-cse hr.style-seven:before {
   /* Not really supposed to work, but does */
   display: block;
   content: "";

@@ -14,7 +14,7 @@
     <% ele.cardlist.forEach((e)=>{ %>
 
       <div class="card">
-        <img src="https://picsum.photos/200" alt="thumbnail" />
+        <img src="/images/<%=e.imgurl %>" alt="thumbnail" />
         <h2><%= e.cardTitle %></h2>
         <div class="card-content">
           <p>
@@ -29,7 +29,20 @@
   </div>
   
   </section>
-  
+
 <% }); %>
+
+<script>
+  console.log("Hello");
+  document.querySelectorAll(".signUp-button")[0].addEventListener("click", function () {
+    document.getElementById("popup").style.display = "flex";
+  });
+
+  document.getElementById("close").addEventListener("click", function () {
+    document.getElementById("popup").style.display = "none";
+    console.log("Hello");
+  });
+
+</script>
 
 <%-include('partials/footer'); -%>

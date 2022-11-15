@@ -10,7 +10,7 @@
          
         <% itemsArray.forEach((ele)=>{ %>
 
-            <form action="/video" method="post">
+            <form action="/courses/<%= courseName%>/pcourse/<%= itemId%>/student/<%= courseId%>" method="post">
 
                 <a href="">
                     <div>
@@ -23,35 +23,10 @@
                 <button type="submit" name="submit_param" value="submit_value">Play</button>
             </form>
 
-            <% }) %>
-
-
-
+            <% }); %>
     </div>
     <div class="list-videos"></div>
-
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

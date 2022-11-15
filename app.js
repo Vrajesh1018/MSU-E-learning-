@@ -96,6 +96,8 @@ app.get("/myprofile", (req, res) => {
 
 
 
+
+
 app.get("/logout", (req, res) => {
   isAuthenticate = false;
   res.redirect("/");
@@ -211,6 +213,7 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
 
     }
 
+  
   });
 
 
@@ -249,7 +252,7 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
       }
 
 
-      res.render("Pcourse", { itemsArray: jsonObject.items });
+      res.render("Pcourse", { itemsArray: jsonObject.items, courseName :courseName, courseId:courseId, itemId :itemId});
 
     });
 
@@ -259,11 +262,9 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
 
 
 
-
 // Route for video play 
-app.post("/video", (req, res) => {
-  //console.log(req.body);
-
+app.post("/courses/:newCourse/pcourse/:itemId/student/:courseId",(req,res)=>{
+  
   var iframeHtml = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/` + req.body.extra_submit_param + `"
   title="YouTube video player" frameborder="0"
   allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -272,8 +273,24 @@ app.post("/video", (req, res) => {
 
   res.send(iframeHtml);
 
-
 });
+
+
+
+
+// app.post("/video", (req, res) => {
+//   //console.log(req.body);
+
+//   var iframeHtml = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/` + req.body.extra_submit_param + `"
+//   title="YouTube video player" frameborder="0"
+//   allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//   allowfullscreen></iframe>`;
+
+
+//   res.send(iframeHtml);
+
+
+// });
 
 
 app.listen(3000, () => {
