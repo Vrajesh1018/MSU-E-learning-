@@ -19,29 +19,27 @@ app.set("views", path.join(__dirname, "public/views"));
 
 app.use(express.static("public"));
 
+
+
+var USERMAIL = "";  // when user registered in course then add details of that course to that particular student in database we need this 
+
+
 // Home route
 app.get("/", (req, res) => {
   console.log(__dirname);
-  //res.sendFile(__dirname + "/index.html");
-
-  // console.log(__dirname);
-  //res.sendFile(__dirname + "/index.html");
-
-  //console.log(courses);
 
   if (isAuthenticate) res.render("login", {});
   else res.render("home", {});
 
-  //console.log(req);
-
-  //console.log(req.body.createAccount);
 });
 
 app.post("/", (request, response) => {
   const email = request.body.emailSignIn;
   const pass = request.body.passSignIn;
 
-  //console.log(request.body);
+
+  USERMAIL = request.body.emailSignIn;
+
 
   axios
     .post("http://localhost:4000/api/foundOne", {
@@ -70,10 +68,35 @@ app.post("/", (request, response) => {
 });
 
 // My Profile route
-app.get("/myprofile", (req, res) => {
+app.get("/myprofile", (req, response) => {
+
+  var userCourseDetails="";
+ 
+  
   if (isAuthenticate) {
-    res.render("dashboard", {});
-    // res.send("My Profile .html banav bhai !");
+
+    console.log(USERMAIL);
+
+    axios.post("http://localhost:4000/api/course/foundOne", {
+      mail: USERMAIL
+    })
+
+      .then((res) => {
+
+        console.log("myprofile response ");
+        //  console.log(res.data.Courses);
+        userCourseDetails = res.data.Courses;
+        console.log(userCourseDetails);
+
+        response.render("dashboard", {courseArr : userCourseDetails});
+
+      })
+      .catch((err) => {
+        console.log("I am from catch");
+        console.log(err);
+      })
+
+
   } else res.redirect("/");
 });
 
@@ -95,12 +118,15 @@ app.post("/register", (req, res) => {
 
   //console.log(req.body);
 
+  //USERMAIL = req.body.registerEmail;
+
+
   axios
     .post("http://localhost:4000/api", {
       prn: req.body.registerPrn,
       mail: req.body.registerEmail,
       password: req.body.registerPassword,
-      name: req.body.registerName,
+      name: req.body.registerName
     })
     .then(function (response) {
       // console.log(response);
@@ -114,36 +140,99 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
-// Courses Route
-// <<<<<<< HEAD
+
+// Courses Route get request
 app.get("/courses/:newCourse", (req, res) => {
-  var newCourse = req.params.newCourse;
-  //    res.sendFile(path);
+  // if (isAuthenticate) {
+  
+    var newCourse = req.params.newCourse;
+    //    res.sendFile(path);
 
-  var courseDetails;
-  console.log("Value of new Course is : " + newCourse);
+    var courseDetails;
+    console.log("Value of new Course is : " + newCourse);
 
-  courses.forEach((element) => {
-    console.log(element.courseName);
+    courses.forEach((element) => {
 
-    // string1.localeCompare(string2) == if both are equal then returns 0 and if if they are equal then add courses.items to it.
-    if (!element.courseName.localeCompare(newCourse))
-      courseDetails = element.items;
-  });
+      //console.log(element.courseName);
 
-  //console.log(courseDetails);
+      // string1.localeCompare(string2) == if both are equal then returns 0 and if if they are equal then add courses.items to it.
+      if (!element.courseName.localeCompare(newCourse))
+        courseDetails = element.items;
+    });
 
-  res.render("coursesTemplate", {
-    courseArr: courseDetails,
-    courseName: newCourse,
-  });
+    //console.log(courseDetails);
+
+    res.render("coursesTemplate", {
+      courseArr: courseDetails,
+      courseName: newCourse,
+    });
+ 
+    // }
+
+
+  // else {
+  //   res.redirect("/");
+  // }
+
+
 });
+
+
+
+// course Route post request when user registerd for course
+app.post("/courses/:newCourse", (req, res) => {
+
+  var courseName = req.params.newCourse;
+
+
+  // console.log(req.body);
+
+
+  var itemid = req.body.extra_submit_param_itemid;
+  var cardId = req.body.extra_submit_param_cardId;
+  var carTitle = req.body.extra_submit_param_cardTitle;
+  var imgurl = req.body.extra_submit_param_imgurl;
+  var author = req.body.extra_submit_param_author;
+
+
+  console.log("value of user mail is : " + USERMAIL);
+
+  console.log(itemid);
+  console.log(cardId);
+
+  axios.post("http://localhost:4000/api/course", {
+    courseName: courseName,
+    itemid: itemid,
+    cardId: cardId,
+    mail: USERMAIL,
+    cardTitle: carTitle,
+    imgurl: imgurl,
+    author: author
+
+  }).then(function (response) {
+
+    //console.log("from I am from axios post");
+    //console.log(response);
+
+  }).catch(function (err) {
+    console.log("I am from catch /api");
+    console.log(err);
+  })
+
+  res.redirect("/courses/" + courseName);
+
+});
+
+
+
+
+
 
 //Particular course Dashboard
 app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
   var courseName = req.params.newCourse;
-  var courseId = req.params.courseId;
   var itemId = req.params.itemId;
+  var courseId = req.params.courseId;     // courseId === cardId
 
   var jsonObjectBody = "";
 
@@ -212,6 +301,7 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
   });
 });
 
+
 // Route for video play
 app.post("/video", (req, res) => {
   //console.log(req.body);
@@ -230,20 +320,6 @@ app.post("/courses/:courseId/pcourse/:itemId/student/:courseId", (req, res) => {
   });
 });
 
-
-// app.post("/video", (req, res) => {
-//   //console.log(req.body);
-
-//   var iframeHtml = `<iframe width="100%" height="100%" src="https://www.youtube.com/embed/` + req.body.extra_submit_param + `"
-//   title="YouTube video player" frameborder="0"
-//   allow="accelerometer;  clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-//   allowfullscreen></iframe>`;
-
-
-//   res.send(iframeHtml);
-
-
-// });
 
 
 app.listen(3000, () => {

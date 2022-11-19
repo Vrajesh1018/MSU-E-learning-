@@ -1,5 +1,6 @@
 <%-include('partials/header'); -%>
 <%-include('partials/navbar'); -%>
+
 <section class="home-page">
   <div class="landing-page">
     <div class="landing-page-information">
@@ -77,17 +78,15 @@
         <button class="btn-2">Contact Us</button>
       </div>
 
-      <script>
-        document.querySelectorAll(".signUp-button")[0].addEventListener("click", function () {
-          document.getElementById("popup").style.display = "flex";
-        });
-
-        document.getElementById("close").addEventListener("click", function () {
-          document.getElementById("popup").style.display = "none";
-          console.log("Hello");
-        });
-
-      </script>
 
     </section>
+
+
+
     <%-include('partials/footer'); -%>
+
+    <script src="/Javascript/sign-up.js"></script>
+    <script src="Javascript/navbar-scroll.js"></script>
+
+    </body>
+    </html>

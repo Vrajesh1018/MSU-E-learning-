@@ -1,4 +1,4 @@
-<%-include('partials/header'); -%> <%-include('partials/navbar'); -%>
+<%-include('partials/header'); -%> <%-include('partials/loginNavbar'); -%>
 
 
 <% courseArr.forEach((ele)=>{ %>
@@ -13,15 +13,28 @@
   
     <% ele.cardlist.forEach((e)=>{ %>
 
-      <div class="card">
-        <img src="/images/<%=e.imgurl %>" alt="thumbnail" />
+      <div class="card" style="width: 400px; height:400px">
+        <img src="/images/<%=e.imgurl %>" alt="thumbnail" style="width: 200px; height: 200px;" />
         <h2><%= e.cardTitle %></h2>
         <div class="card-content">
           <p>
-           <%= e.desc %>
+           <%= e.desc.slice(0,80) + "..." %>
           </p>
           <h3><%= e.author %></h3>
           <a href="/courses/<%= courseName %>/pcourse/<%= ele.itemid %>/student/<%= e.cardId %>"><button class="btn-1" >Explore</button></a>
+          
+          <form action="/courses/<%= courseName %>" method="post">
+ 
+            <input type="hidden" name="extra_submit_param_itemid" value="<%=  ele.itemid %>">
+            <input type="hidden" name="extra_submit_param_cardId" value="<%=  e.cardId%>">
+            <input type="hidden" name ="extra_submit_param_cardTitle" value="<%= e.cardTitle%>">
+            <input type="hidden" name ="extra_submit_param_imgurl" value="<%= e.imgurl%>">
+            <input type="hidden" name ="extra_submit_param_author" value="<%= e.author%>">
+
+            <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
+
+          </form>
+
         </div>
       </div>
    <% }); %>
@@ -32,17 +45,11 @@
 
 <% }); %>
 
-<script>
-  console.log("Hello");
-  document.querySelectorAll(".signUp-button")[0].addEventListener("click", function () {
-    document.getElementById("popup").style.display = "flex";
-  });
-
-  document.getElementById("close").addEventListener("click", function () {
-    document.getElementById("popup").style.display = "none";
-    console.log("Hello");
-  });
-
-</script>
 
 <%-include('partials/footer'); -%>
+
+<script src="/Javascript/sign-up.js"></script>
+<script src="/Javascript/navbar-scroll.js"></script>
+
+</body>
+</html>

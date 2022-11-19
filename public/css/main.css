@@ -75,29 +75,6 @@
   width: 90vw;
   justify-content: center;
 }
-.navbar ul li {
-  list-style: none;
-  padding-inline: 1rem;
-  display: inline-block;
-}
-
-/* Bug solved . */
-.nav-links-dropdown-ul li{
-  display: block !important;
-}
-
-.navbar ul li a {
-  text-decoration: none;
-  color: #a2a1a3;
-  font-weight: 500;
-  border-bottom: none;
-  border-bottom-width: 0;
-  transition: color 0.5s, border-bottom 0.5s;
-}
-.navbar ul li a:hover {
-  border-bottom: 1px solid #ea5d61;
-  color: black;
-}
 .navbar .profile-btn img {
   width: 3rem;
   height: 2.5rem;
@@ -146,18 +123,18 @@
   color: white !important;
 }
 
-/* Bug 2 solved !! */
-.navbar.scrolled .nav-links-dropdown-ul a{
-  color: gray !important; 
+.nav-links-ul > li {
+  list-style: none;
+  padding-inline: 1rem;
+  display: inline-block;
 }
-
-
-/* Dropdown CSS */
-.home-page .landing-page {
-  display: grid;
-  grid-template-columns: repeat(2, 45vw);
-  justify-content: space-around;
-  margin-top: 7rem;
+.nav-links-ul > li a {
+  text-decoration: none;
+  color: #a2a1a3;
+  font-weight: 500;
+  border-bottom: none;
+  border-bottom-width: 0;
+  transition: color 0.5s, border-bottom 0.5s;
 }
 .nav-links-ul > li a:hover {
   border-bottom: 1px solid #ea5d61;
@@ -480,6 +457,7 @@ footer a {
   color: white;
   margin-right: 1rem;
   line-height: 1.5;
+  padding: 25px;
 }
 .careusel-cse .cards .card img {
   margin-top: 0.2rem;
@@ -648,4 +626,20 @@ footer a {
   cursor: pointer;
 }
 
-/* Styles for particular course when student clicks on GO TO course *//*# sourceMappingURL=main.css.map */
+/* Styles for particular course when student clicks on GO TO course# sourceMappingURL=main.css.map */
+
+
+
+
+/* style for profile button after login */
+.myprofile-logo{
+  list-style: none;
+}
+.myprofile-logo>li{
+  /* display: none; */
+}
+
+.profile-dropdown-logo:hover{
+  cursor: pointer;
+  display: block;
+}

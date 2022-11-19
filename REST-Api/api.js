@@ -17,7 +17,16 @@ const studentSchema = new mongoose.Schema({
     PRN: Number,
     Email: String,
     Password: String,
-    Name: String
+    Name: String,
+    Courses: [{
+        courseName: String,
+        itemId: String,
+        cardId: String,
+        cardTitle: String,
+        imgurl: String,
+        author: String
+
+    }]
 });
 
 const Student = mongoose.model("student", studentSchema);
@@ -36,8 +45,7 @@ app.route("/api")
 
             });
         }
-        catch(e)
-        {
+        catch (e) {
             console.log(e);
         }
     })
@@ -63,18 +71,28 @@ app.route("/api")
         });
 
 
-
-        // This will store data of new student into out mongodb database.
-        newStudent.save((err) => {
+        Student.findOne({ Email: mail }, (err, foundUser) => {
             if (!err) {
 
-                res.send("Data saved !!!");
-                console.log("Data saved sucessfully !!!");
-            }
-            else
-                console.log(err);
+                if (foundUser) {
+                    console.log("User with same mail id is already exists !!");
+                } else {
+                    // This will store data of new student into out mongodb database.
+                    newStudent.save((err) => {
+                        if (!err) {
 
-        });
+                            res.send("Data saved !!!");
+                            console.log("Data saved sucessfully !!!");
+                        }
+                        else
+                            console.log(err);
+
+                    });
+                }
+            }
+        })
+
+
 
 
     });
@@ -107,6 +125,68 @@ app.post("/api/foundOne", (req, res) => {
         }
     })
 
+
+
+});
+
+
+app.post("/api/course", (req, res) => {
+
+    console.log(req.body);
+
+    const course = {
+        courseName: req.body.courseName,
+        itemId: req.body.itemid,
+        cardId: req.body.cardId,
+        cardTitle: req.body.cardTitle,
+        imgurl: req.body.imgurl,
+        author: req.body.author
+    }
+
+    //console.log(course);
+
+
+    const filter = { Email: req.body.mail }
+
+    // as we want to update an array of object that is courses hence this syntax is used and third param new : true means after updation return that object
+
+    const updatedStudent = Student.findOneAndUpdate(filter, { $push: { Courses: course } }, (err, data) => {
+        if (err)
+            console.log(err);
+        else {
+
+            //console.log(data);
+            console.log("data sucessfully updated to database !!!");
+        }
+    });
+
+    //console.log(updatedStudent);
+
+
+    res.send("Request sucessfully recieved at api/course");
+
+});
+
+
+// used for myprofile post request method
+app.post("/api/course/foundOne", (req, res) => {
+
+    const mail = req.body.mail;
+    console.log(mail);
+    console.log("I am from /course/foundOne");
+
+
+    Student.findOne({ Email: mail }, (err, founduser) => {
+
+        if (!err) {
+
+            console.log(founduser);
+
+            res.send(founduser);
+        }
+
+
+    });
 
 
 });
