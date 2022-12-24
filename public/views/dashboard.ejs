@@ -38,7 +38,7 @@
           </div>
           <div class="item-d">
             <p>Total Courses Registered</p>
-            <p>10</p>
+            <p><%= courseArr.length %></p>
           </div>
           <div class="item-d">
             <p>Completed Courses</p>
@@ -49,9 +49,18 @@
 
 
         <div class="dashboard-content-item-2">
+          
           <h1> List of enrolled classes </h1>
 
+          
+          <% if(courseArr.length==0){ %>
+            <p>No course are enrolled !!!</p>
+            
+            <% } else{ %>
+              
+    
           <% courseArr.forEach((ele)=>{ %>
+
             <div class="enroll-class">
 
               <span> <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><img
@@ -80,6 +89,8 @@
             </div>
 
             <% }) %>
+
+          <% } %>
 
 
 

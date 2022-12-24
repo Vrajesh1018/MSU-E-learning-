@@ -13,7 +13,7 @@
 
     <% itemsArray.forEach((ele)=>{ %>
 
-    <form action="/courses/<%= courseName %>/pcourse/<%= itemId %>/student/<%= courseId %>" method="post">
+    <!-- <form action="/courses/<%= courseName %>/pcourse/<%= itemId %>/student/<%= courseId %>" method="post">
 
       <a href="">
         <div>
@@ -24,11 +24,30 @@
           </button>
         </div>
       </a>
-      <input type="hidden" name="extra_submit_param_videoId" value="<%=  ele.snippet.resourceId.videoId %>">
-      <input type="hidden" name="extra_submit_param_courseName" value="<%=  courseName %>">
-      <input type="hidden" name="extra_submit_param_courseId" value="<%=  courseId %>">
-      <!-- <button type="submit" name="submit_param" value="submit_value">Play</button> -->
+      <input type="hidden" name="extra_submit_param_videoId" value="<%=  ele.snippet.resourceId.videoId %>" >
+      <input type="hidden" name="extra_submit_param_courseName" value="<%=  courseName %>" >
+      <input type="hidden" name="extra_submit_param_courseId" value="<%=  courseId %>" >
+   
+    </form> -->
+
+    <form action="/video" method="post">
+
+      <a href="">
+        <div>
+          <button type="submit">
+            <h3>
+              <%= ele.snippet.title %>
+            </h3>
+          </button>
+        </div>
+      </a>
+      <input type="hidden" name="extra_submit_param_videoId" value="<%=  ele.snippet.resourceId.videoId %>" >
+      <input type="hidden" name="extra_submit_param_courseName" value="<%=  courseName %>" >
+      <input type="hidden" name="extra_submit_param_courseId" value="<%=  courseId %>" >
+      <input type="hidden" name="extra_submit_param_itemId" value="<%=  itemId %>" >
+   
     </form>
+
 
 
     <% }) %>

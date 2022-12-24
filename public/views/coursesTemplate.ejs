@@ -21,8 +21,26 @@
            <%= e.desc.slice(0,80) + "..." %>
           </p>
           <h3><%= e.author %></h3>
+
           <a href="/courses/<%= courseName %>/pcourse/<%= ele.itemid %>/student/<%= e.cardId %>"><button class="btn-1" >Explore</button></a>
           
+
+           <!--         ***** Issue of fisrt video post request !!  
+
+          <form action="/video" method="post">
+ 
+            <input type="hidden" name="extra_submit_param_itemId" value="<%=  ele.itemid %>">
+            <input type="hidden" name="extra_submit_param_cardId" value="<%=  e.cardId%>">
+            <input type="hidden" name ="extra_submit_param_cardTitle" value="<%= e.cardTitle%>">
+            <input type="hidden" name ="extra_submit_param_imgurl" value="<%= e.imgurl%>">
+            <input type="hidden" name ="extra_submit_param_author" value="<%= e.author%>">
+            <input type="hidden" name ="extra_submit_param_courseName" value="<%= courseName%>">
+
+
+            <button type="submit" id="courseRegisterBtn" class="btn-1">Explore</button>
+
+          </form> -->
+
           <form action="/courses/<%= courseName %>" method="post">
  
             <input type="hidden" name="extra_submit_param_itemid" value="<%=  ele.itemid %>">
@@ -30,6 +48,8 @@
             <input type="hidden" name ="extra_submit_param_cardTitle" value="<%= e.cardTitle%>">
             <input type="hidden" name ="extra_submit_param_imgurl" value="<%= e.imgurl%>">
             <input type="hidden" name ="extra_submit_param_author" value="<%= e.author%>">
+            <input type="hidden" name ="extra_submit_param_courseName" value="<%= courseName%>">
+
 
             <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
 
