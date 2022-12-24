@@ -7,6 +7,7 @@ const path = require("path");
 const courses = require("./Content/courses.js");
 const https = require("https");
 
+
 const app = express();
 
 var isAuthenticate = false;
@@ -67,10 +68,10 @@ app.post("/", (request, response) => {
     });
 });
 
-// My Profile route
+// My Profile route get request
 app.get("/myprofile", (req, response) => {
 
-  var userCourseDetails="";
+  let userCourseDetails="";
  
   
   if (isAuthenticate) {
@@ -83,10 +84,10 @@ app.get("/myprofile", (req, response) => {
 
       .then((res) => {
 
-        console.log("myprofile response ");
+        //console.log("myprofile response ");
         //  console.log(res.data.Courses);
         userCourseDetails = res.data.Courses;
-        console.log(userCourseDetails);
+        //console.log(userCourseDetails);
 
         response.render("dashboard", {courseArr : userCourseDetails});
 
@@ -97,7 +98,32 @@ app.get("/myprofile", (req, response) => {
       })
 
 
-  } else res.redirect("/");
+  } else response.redirect("/");
+});
+
+
+//when user take out from the course then it make post request to the /myprofile route
+app.post("/myprofile",(req,response)=>{
+
+  console.log("I am from post request of /myprofile");
+  console.log(req.body);
+
+  axios.post("http://localhost:4000/api/course/removeCourse",{
+    mail : USERMAIL,
+    cardId : req.body.extra_submit_param_cardId
+  })
+
+  .then((res)=>{
+    console.log(res.data);
+  })
+  .catch((err)=>{
+    console.log(err);
+  });
+
+
+  // Again redirect back to /myprofile so it's work like refresh the page and course has been removed.
+  response.redirect("/myprofile");
+
 });
 
 
@@ -143,12 +169,12 @@ app.post("/register", (req, res) => {
 
 // Courses Route get request
 app.get("/courses/:newCourse", (req, res) => {
-  // if (isAuthenticate) {
+  if (isAuthenticate) {
   
-    var newCourse = req.params.newCourse;
+    let newCourse = req.params.newCourse;
     //    res.sendFile(path);
 
-    var courseDetails;
+    let courseDetails;
     console.log("Value of new Course is : " + newCourse);
 
     courses.forEach((element) => {
@@ -167,12 +193,12 @@ app.get("/courses/:newCourse", (req, res) => {
       courseName: newCourse,
     });
  
-    // }
+    }
 
 
-  // else {
-  //   res.redirect("/");
-  // }
+  else {
+    res.redirect("/");
+  }
 
 
 });
@@ -182,17 +208,17 @@ app.get("/courses/:newCourse", (req, res) => {
 // course Route post request when user registerd for course
 app.post("/courses/:newCourse", (req, res) => {
 
-  var courseName = req.params.newCourse;
+  let courseName = req.params.newCourse;
 
 
   // console.log(req.body);
 
 
-  var itemid = req.body.extra_submit_param_itemid;
-  var cardId = req.body.extra_submit_param_cardId;
-  var carTitle = req.body.extra_submit_param_cardTitle;
-  var imgurl = req.body.extra_submit_param_imgurl;
-  var author = req.body.extra_submit_param_author;
+  let itemid = req.body.extra_submit_param_itemid;
+  let cardId = req.body.extra_submit_param_cardId;
+  let carTitle = req.body.extra_submit_param_cardTitle;
+  let imgurl = req.body.extra_submit_param_imgurl;
+  let author = req.body.extra_submit_param_author;
 
 
   console.log("value of user mail is : " + USERMAIL);
@@ -230,13 +256,13 @@ app.post("/courses/:newCourse", (req, res) => {
 
 //Particular course Dashboard
 app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
-  var courseName = req.params.newCourse;
-  var itemId = req.params.itemId;
-  var courseId = req.params.courseId;     // courseId === cardId
+  let courseName = req.params.newCourse;
+  let itemId = req.params.itemId;
+  let courseId = req.params.courseId;     // courseId === cardId
 
-  var jsonObjectBody = "";
+  let jsonObjectBody = "";
 
-  var playlistId = "";
+  let playlistId = "";
 
   courses.forEach((ele) => {
     // This means we find the object of particular course ex. CSE.
@@ -259,7 +285,7 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
 
   //console.log(playlistId);
 
-  var playlistURL =
+  let playlistURL =
     "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
     playlistId +
     "&key=" +
@@ -274,19 +300,19 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
     });
 
     response.on("end", () => {
-      var jsonObject = JSON.parse(jsonObjectBody);
+      let jsonObject = JSON.parse(jsonObjectBody);
 
       // It's working correctly
       // console.log(jsonObject.items[0]);
 
       // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
-      var nextPageToken = jsonObject.nextPageToken;
+      let nextPageToken = jsonObject.nextPageToken;
 
-      var itemLength = jsonObject.items.length;
+      let itemLength = jsonObject.items.length;
 
       // console.log(itemLength);
 
-      for (var i = 0; i < itemLength; i++) {
+      for (let i = 0; i < itemLength; i++) {
         //console.log(jsonObject.items[i].snippet.title);
       }
 

@@ -54,22 +54,32 @@
           <% courseArr.forEach((ele)=>{ %>
             <div class="enroll-class">
 
-              <span> <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><img src="/images/<%= ele.imgurl %>" alt="Image of course"  style="width: 100px; height: 100px;" ></a>
-  
-                <h4><%= ele.cardTitle %></h4>
-  
-              </span>
-  
-              <p>Offered by profeesor <%= ele.author %> </p>
-  
-              <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><button class="btn-dashboard"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i> GO to
-              </button></a>
+              <span> <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><img
+                    src="/images/<%= ele.imgurl %>" alt="Image of course" style="width: 100px; height: 100px;"></a>
 
-              
-              <a href=""><button class="btn-dashboard"> <i class="fa-sharp fa-solid fa-trash"></i> Take Out</button></a>
+                <h4>
+                  <%= ele.cardTitle %>
+                </h4>
+
+              </span>
+
+              <p>Offered by profeesor <%= ele.author %>
+              </p>
+
+              <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><button
+                  class="btn-dashboard"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i> GO to
+                </button></a>
+
+
+              <form action="/myprofile" method="post"><a href=""><button class="btn-dashboard"> <i
+                      class="fa-sharp fa-solid fa-trash"></i> Take Out</button></a>
+                    
+                      <input type="hidden" name="extra_submit_param_cardId" value="<%= ele.cardId %>">
+
+                    </form>
             </div>
 
-          <% }) %>
+            <% }) %>
 
 
 

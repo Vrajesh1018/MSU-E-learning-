@@ -2,6 +2,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
+const studentSchema = require("../models/studentModel.js");
 
 const app = express();
 
@@ -11,23 +12,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/student");
-
-
-const studentSchema = new mongoose.Schema({
-    PRN: Number,
-    Email: String,
-    Password: String,
-    Name: String,
-    Courses: [{
-        courseName: String,
-        itemId: String,
-        cardId: String,
-        cardTitle: String,
-        imgurl: String,
-        author: String
-
-    }]
-});
 
 const Student = mongoose.model("student", studentSchema);
 
@@ -105,12 +89,12 @@ app.post("/api/foundOne", (req, res) => {
     console.log(req.body);
     var isAuthenticate = false;
 
-    console.log("Hello I am from FoundOne !");
+    //console.log("Hello I am from FoundOne !");
 
     Student.findOne({ Email: emailApi }, (err, foundUser) => {
         if (!err) {
 
-            console.log(foundUser);
+            //console.log(foundUser);
             if (foundUser.Password === passApi) {
 
                 isAuthenticate = true;
@@ -173,20 +157,47 @@ app.post("/api/course/foundOne", (req, res) => {
 
     const mail = req.body.mail;
     console.log(mail);
-    console.log("I am from /course/foundOne");
+    //console.log("I am from /course/foundOne");
 
 
     Student.findOne({ Email: mail }, (err, founduser) => {
 
         if (!err) {
 
-            console.log(founduser);
+            //console.log(founduser);
 
             res.send(founduser);
         }
 
 
     });
+
+
+});
+
+
+//used for removing particular course.
+app.post("/api/course/removeCourse",(req,res)=>{
+
+    console.log(req.body);
+    // const mail = req.body.mail;
+    // const cardId = req.body.cardId;
+
+    // console.log(mail);
+    // console.log(cardId);
+
+    const updateCourse = Student.findOneAndUpdate({Email : req.body.mail},{ $pull : {Courses : {cardId :req.body.cardId}}},(err,data)=>{
+
+        if(!err){
+            //console.log(data);
+            res.send("Okk course removed using API");
+        }
+        else{
+            console.log(err);
+        }
+
+    });
+
 
 
 });
