@@ -3,14 +3,16 @@
 
 <% courseArr.forEach((ele)=>{ %>
 
-  <section class="careusel-cse">
+<section class="careusel-cse">
 
-    <center><h1><%= ele.domain %></h1></center>
-  
+  <center>
+    <h1><%= ele.domain %></h1>
+  </center>
+
   <hr class="style-seven">
-  
+
   <div class="cards">
-  
+
     <% ele.cardlist.forEach((e)=>{ %>
 
       <div class="card" style="width: 400px; height:400px">
@@ -35,17 +37,17 @@
             <input type="hidden" name ="extra_submit_param_courseName" value="<%= courseName%>">
 
 
-            <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
+          <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
 
-          </form>
+        </form>
 
-        </div>
       </div>
-   <% }); %>
-    
+    </div>
+    <% }); %>
+
   </div>
-  
-  </section>
+
+</section>
 
 <% }); %>
 
@@ -54,6 +56,8 @@
 
 <script src="/Javascript/sign-up.js"></script>
 <script src="/Javascript/navbar-scroll.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
+
 </html>

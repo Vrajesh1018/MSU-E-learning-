@@ -62,9 +62,9 @@
   font-size: 2rem;
 }
 .navbar .logo h2 a {
+  transition: all 0.5s;
   text-decoration: none;
   color: #ea5d61;
-  transition: all 0.5s;
 }
 .navbar .logo h2 a:hover {
   cursor: pointer;
@@ -78,10 +78,18 @@
 .navbar .profile-btn img {
   width: 3rem;
   height: 2.5rem;
+  cursor: pointer;
+}
+.navbar .profile-btn:hover .profile-dropdown {
+  display: block;
+  position: absolute;
 }
 .navbar .profile-btn .profile-dropdown {
   border: 1px solid black;
+  padding: 0.5rem;
   border-radius: 0.4rem;
+  display: none;
+  z-index: 1;
 }
 .navbar .courses .courses-dropdown {
   display: none;
@@ -155,7 +163,7 @@
   z-index: 1;
 }
 .popup .popup-content {
-  height: 15.525rem;
+  height: 20.525rem;
   width: 31.25rem;
   background: rgba(234, 93, 98, 0.8156862745);
   color: white;
@@ -215,8 +223,12 @@
   border-bottom-color: white;
 }
 .popup .popup-content .btn-signUp-popup {
-  background-color: white !important;
-  color: #ea5d61 !important;
+  background-color: white;
+  color: #ea5d61;
+}
+.popup .popup-content .btn-signUp-popup:hover {
+  background-color: whitesmoke;
+  color: rgba(234, 93, 97, 0.5);
 }
 .popup .popup-content .close {
   position: absolute;
@@ -544,38 +556,58 @@ footer a {
   font-weight: 400 !important;
 }
 
-/*   Dahsboard Styles */
+/*   Dashboard Styles */
 .dashboard-container {
   display: flex;
 }
-
-.side-nav {
-  border-right: 2px solid gray;
-  margin: 4rem;
-  width: 20%;
+.dashboard-container a,
+.dashboard-container a:active,
+.dashboard-container a:visited {
+  color: black;
 }
-
-.side-nav > div {
+.dashboard-container .side-nav {
+  border-right: 2px solid #ea5d61;
+  margin: 4rem;
+}
+.dashboard-container .side-nav .side-nav-item {
   margin: 5rem;
 }
-
-.side-nav-item > a {
-  text-decoration: none;
+.dashboard-container .side-nav .side-nav-item .side-nav-course-dropdown {
+  display: none;
+  padding-block: 1rem;
+  margin-top: 0;
+  position: relative;
+  padding-left: 2rem;
+}
+.dashboard-container .side-nav .side-nav-item .side-nav-course-dropdown ul {
+  text-align: left;
+}
+.dashboard-container .side-nav .side-nav-item .side-nav-course-dropdown ul li {
+  list-style: none;
+  margin-block: 0.5rem;
+}
+.dashboard-container .side-nav .side-nav-item > a {
+  display: inline-block;
+  padding-block: 1rem;
+  padding-left: 2rem;
+  border-radius: 2rem;
+  background-color: inherit;
+  width: 150%;
   color: black;
   font-weight: 500;
-  border-bottom: none;
-  border-bottom-width: 0;
-  transition: color 0.5s, border-bottom 0.5s;
+  transition: color, border-bottom, background-color 0.5s;
+}
+.dashboard-container .side-nav .side-nav-item > a:hover {
+  background-color: rgba(128, 128, 128, 0.2);
+}
+.dashboard-container .side-nav .side-nav-item > a i {
+  color: #ea5d61;
 }
 
 .analytics-dashboard {
   padding: 5rem;
   text-align: center;
   width: 80%;
-}
-
-.analytics-heading {
-  /* margin-left: 2rem; */
 }
 
 .dashboard-content-item-1 {
@@ -588,22 +620,30 @@ footer a {
   margin: 2rem;
   padding: 2rem;
 }
-
 .item-d > p {
   margin: 0.5rem;
 }
 
 .enroll-class {
-  margin: 2rem;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
-  text-align: start;
+  display: grid;
+  transition: all 0.5s;
+  padding-block: 1rem;
+  margin-block: 2rem;
+  align-items: center;
+  grid-template-columns: 45% 15% 15% 15%;
+  margin-bottom: 1rem;
   border-left: 3px solid #b52863;
 }
-
+.enroll-class:first-child {
+  display: flex;
+  flex-direction: column;
+}
+.enroll-class:last-child, .enroll-class:nth-last-child(2) {
+  align-items: center;
+}
 .enroll-class:hover {
   background-color: #eaf0f0;
+  border-radius: 2rem;
 }
 
 .btn-dashboard {
@@ -615,8 +655,9 @@ footer a {
   font-size: 12px;
   padding: 12px 20px 10px 20px;
   text-decoration: none;
+  outline: none;
+  border: none;
 }
-
 .btn-dashboard:hover {
   background: #f788b0;
   background-image: linear-gradient(to bottom, #f788b0, #d649a5);
@@ -624,26 +665,11 @@ footer a {
   cursor: pointer;
 }
 
-/* circular progress bar dashboard */
-.circular-prgress {
-  position: relative;
-  height: 200px;
-  width: 200px;
-  background-color: #f711a3;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
+a {
+  text-decoration: none;
 }
 
-.circular-prgress:before {
-  content: "";
-  position: absolute;
-  height: 87%;
-  width: 87%;
-  background-color: white;
-  border-radius: 50%;
-}
-
+/* Styles for particular course when student clicks on GO TO course */
 .value-container {
   position: relative;
   font-size: 50px;

@@ -1,35 +1,58 @@
-/*   Dahsboard Styles */
+/*   Dashboard Styles */
 .dashboard-container {
+  a,
+  a:active,
+  a:visited {
+    color: black;
+  }
   display: flex;
-}
 
-.side-nav {
-  border-right: 2px solid gray;
-  margin: 4rem;
-  width: 20%;
-}
+  .side-nav {
+    border-right: 2px solid $primary-color;
+    margin: 4rem;
+    .side-nav-item {
+      margin: 5rem;
 
-.side-nav > div {
-  margin: 5rem;
-}
+      .side-nav-course-dropdown {
+        display: none;
+        padding-block: 1rem;
+        margin-top: 0;
+        position: relative;
+        padding-left: 2rem;
+        ul {
+          text-align: left;
+          li {
+            list-style: none;
+            margin-block: 0.5rem;
+          }
+        }
+      }
+      & > a {
+        display: inline-block;
+        padding-block: 1rem;
+        padding-left: 2rem;
+        border-radius: 2rem;
+        background-color: inherit;
+        width: 150%;
+        color: black;
+        font-weight: 500;
+        transition: color, border-bottom, background-color 0.5s;
 
-.side-nav-item > a {
-  text-decoration: none;
-  color: black;
-  font-weight: 500;
-  border-bottom: none;
-  border-bottom-width: 0;
-  transition: color 0.5s, border-bottom 0.5s;
+        &:hover {
+          background-color: rgba($color: gray, $alpha: 0.2);
+        }
+        i {
+          color: $primary-color;
+        }
+      }
+    }
+  }
 }
 
 .analytics-dashboard {
   padding: 5rem;
   text-align: center;
   width: 80%;
-}
-
-.analytics-heading {
-  /* margin-left: 2rem; */
 }
 
 .dashboard-content-item-1 {
@@ -41,24 +64,48 @@
 .item-d {
   margin: 2rem;
   padding: 2rem;
+  & > p {
+    margin: 0.5rem;
+  }
 }
 
-.item-d > p {
-  margin: 0.5rem;
-}
+// .enroll-class {
+//   margin: 2rem;
+//   padding: 1rem;
+//   display: flex;
+//   justify-content: space-around;
+//   text-align: start;
+//   border-left: 3px solid #b52863;
+//   &:hover {
+//     background-color: #eaf0f0;
+//   }
+// }
 
 .enroll-class {
-  margin: 2rem;
-  padding: 1rem;
-  display: flex;
-  justify-content: space-around;
-  text-align: start;
+  display: grid;
+  transition: all 0.5s;
+  padding-block: 1rem;
+  margin-block: 2rem;
+  align-items: center;
+  // justify-content: center;
+  grid-template-columns: 45% 15% 15% 15%;
+  margin-bottom: 1rem;
   border-left: 3px solid #b52863;
-}
-.enroll-class:hover {
-  background-color: #eaf0f0;
-}
 
+  &:first-child {
+    display: flex;
+    flex-direction: column;
+  }
+  &:last-child,
+  &:nth-last-child(2) {
+    // display: flex;
+    align-items: center;
+  }
+  &:hover {
+    background-color: #eaf0f0;
+    border-radius: 2rem;
+  }
+}
 .btn-dashboard {
   background: #f711a3;
   background-image: -webkit-linear-gradient(top, #f711a3, #b52863);
@@ -74,19 +121,22 @@
   font-size: 12px;
   padding: 12px 20px 10px 20px;
   text-decoration: none;
+  outline: none;
+  border: none;
+  &:hover {
+    background: #f788b0;
+    background-image: -webkit-linear-gradient(top, #f788b0, #d649a5);
+    background-image: -moz-linear-gradient(top, #f788b0, #d649a5);
+    background-image: -ms-linear-gradient(top, #f788b0, #d649a5);
+    background-image: -o-linear-gradient(top, #f788b0, #d649a5);
+    background-image: linear-gradient(to bottom, #f788b0, #d649a5);
+    text-decoration: none;
+    cursor: pointer;
+  }
 }
-
-.btn-dashboard:hover {
-  background: #f788b0;
-  background-image: -webkit-linear-gradient(top, #f788b0, #d649a5);
-  background-image: -moz-linear-gradient(top, #f788b0, #d649a5);
-  background-image: -ms-linear-gradient(top, #f788b0, #d649a5);
-  background-image: -o-linear-gradient(top, #f788b0, #d649a5);
-  background-image: linear-gradient(to bottom, #f788b0, #d649a5);
+a {
   text-decoration: none;
-  cursor: pointer;
 }
-
 
 
 /* circular progress bar dashboard */
@@ -112,6 +162,12 @@
   background-color: white;
   border-radius: 50%;
 
+}
+
+ul {
+  li {
+    text-decoration: none;
+  }
 }
 
 .value-container{

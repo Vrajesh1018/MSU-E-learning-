@@ -17,10 +17,20 @@
 
     <div class="item side-nav">
 
-      <div class="side-nav-item"><a href="#"><i class="fa-regular fa-grid-2"></i> Dashboard</a></div>
-      <div class="side-nav-item"><a href="/myprofile/mydetails"> My profile </a></div>
-      <div class="side-nav-item"><a href="/">Home</a></div>
-      <div class="side-nav-item"><a href="/logout">Logout</a></div>
+      <div class="side-nav-item"><a href="#"><i class="fa-solid fa-chart-simple"></i>&nbsp;&nbsp; Dashboard</a></div>
+      <div class="side-nav-item"><a href="/myprofile/mydetails"><i class="fa-solid fa-user"></i>&nbsp;&nbsp; My profile </a></div>
+      <div class="side-nav-item"><a href="#!" id="side-nav-dropdown-btn"><i class="fa-solid fa-angle-down"></i>&nbsp;&nbsp; Courses</a>
+        <div class="side-nav-course-dropdown" id="side-nav-course-dropdown">
+          <ul>
+            <li><a href="/courses/cse" id="li-cse">CSE</a></li>
+            <li><a href="/courses/electrical" id="li-ele">Electrical</a></li>
+            <li><a href="/courses/civil" id="li-civil">Civil</a></li>
+            <li><a href="/courses/mechanical" id="li-mech">Mechanical</a></li>
+            <li><a href="/courses/chemical" id="li-chem">Chemical</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="side-nav-item"><a href="/logout"><i class="fa-solid fa-right-from-bracket"></i>&nbsp;&nbsp; Logout</a></div>
 
     </div>
 
@@ -79,37 +89,35 @@
             <% } else{ %>
 
 
-              <% courseArr.forEach((ele)=>{ %>
+          <% courseArr.forEach((ele)=>{ %>
+          <div class="enroll-class">
 
-                <div class="enroll-class">
+            <div> <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><img src="/images/<%= ele.imgurl %>" alt="Image of course" style="width: 100px; height: 100px;"></a>
 
-                  <span> <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><img
-                        src="/images/<%= ele.imgurl %>" alt="Image of course" style="width: 100px; height: 100px;"></a>
+              <p>
+                <%= ele.cardTitle %>
+              </p>
 
-                    <h4>
-                      <%= ele.cardTitle %>
-                    </h4>
+            </div>
 
-                  </span>
+            <div><span>By <%= ele.author %>
+              </span></div>
 
-                  <p>Offered by profeesor <%= ele.author %>
-                  </p>
-
-                  <a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><button
-                      class="btn-dashboard"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i> GO to
-                    </button></a>
+            <div><a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><button class="btn-dashboard"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i> GO to
+                </button></a>
+            </div>
 
 
-                  <form action="/myprofile" method="post"><a href=""><button class="btn-dashboard"> <i
-                          class="fa-sharp fa-solid fa-trash"></i> Take Out</button></a>
+            <div>
+              <form action="/myprofile" method="post"><a href=""><button class="btn-dashboard"> <i class="fa-sharp fa-solid fa-trash"></i> Take Out</button></a>
 
-                    <input type="hidden" name="extra_submit_param_cardId" value="<%= ele.cardId %>">
-                    <input type="hidden" name="extra_submit_param_itemId" value="<%= ele.itemId %>">
+                <input type="hidden" name="extra_submit_param_cardId" value="<%= ele.cardId %>">
 
-                  </form>
-                </div>
+              </form>
+            </div>
+          </div>
 
-                <% }) %>
+          <% }) %>
 
                   <% } %>
 
@@ -123,6 +131,7 @@
     </div>
 
   </div>
+  <script src="Javascript/dashboard.js"></script>
 
 
   <%-include('partials/footer'); -%>
