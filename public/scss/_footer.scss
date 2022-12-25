@@ -37,4 +37,26 @@ footer {
     text-decoration: none;
     color: #919092;
   }
+  .icon_logo:hover {
+  color: rgb(9, 220, 223);
+  color: $primary-color;
+  border-radius: 3px;
+  transition: all 1s;
+}
+
+}
+.take-a-tour a{
+  &:hover {
+      border-bottom: 1px solid $primary-color;
+      color: black;
+    }
+}
+.our-company a{
+  &:hover {
+      border-bottom: 1px solid $primary-color;
+      color: black;
+    }
+}
+pre {
+  color: #919092;
 }

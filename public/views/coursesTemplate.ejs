@@ -14,16 +14,14 @@
     <% ele.cardlist.forEach((e)=>{ %>
 
       <div class="card" style="width: 400px; height:400px">
-        <img src="/images/<%=e.imgurl %>" alt="thumbnail" style="width: 200px; height: 200px;" />
+        <img src="/images/<%=e.imgurl %>" alt="thumbnail" id="course_img" style="height: 200px;width: 200px;"/>
         <h2><%= e.cardTitle %></h2>
         <div class="card-content">
           <p>
            <%= e.desc.slice(0,80) + "..." %>
           </p>
           <h3><%= e.author %></h3>
-          <a href="/courses/<%= courseName %>/pcourse/<%= ele.itemid %>/student/<%= e.cardId %>"><button class="btn-1" >Explore</button></a>
-          
-          <form action="/courses/<%= courseName %>" method="post">
+          <div style="display: inline-block;"><form action="/courses/<%= courseName %>" method="post">
  
             <input type="hidden" name="extra_submit_param_itemid" value="<%=  ele.itemid %>">
             <input type="hidden" name="extra_submit_param_cardId" value="<%=  e.cardId%>">
@@ -31,9 +29,9 @@
             <input type="hidden" name ="extra_submit_param_imgurl" value="<%= e.imgurl%>">
             <input type="hidden" name ="extra_submit_param_author" value="<%= e.author%>">
 
-            <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
+          <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
 
-          </form>
+          </form></div>
 
         </div>
       </div>
