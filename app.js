@@ -136,12 +136,13 @@ app.get("/myprofile", (req, response) => {
 // when user take out from the course then it make post request to the /myprofile route
 app.post("/myprofile", (req, response) => {
 
-  console.log("I am from post request of /myprofile");
-  console.log(req.body);
+  //console.log("I am from post request of /myprofile");
+  //console.log(req.body);
 
   axios.post("http://localhost:4000/api/course/removeCourse", {
     mail: USERMAIL,
-    cardId: req.body.extra_submit_param_cardId
+    cardId: req.body.extra_submit_param_cardId,
+    itemId : req.body.extra_submit_param_itemId
   })
 
     .then((res) => {
@@ -167,7 +168,9 @@ app.get("/logout", (req, res) => {
 
 // Register Route
 app.get("/register", (req, res) => {
-  res.sendFile(__dirname + "/register.html");
+
+  res.render("register");
+  //res.sendFile(__dirname + "/register.html");
 });
 
 
@@ -190,13 +193,18 @@ app.post("/register", (req, res) => {
     .then(function (response) {
       // console.log(response);
       console.log("JSON OBJECT send sucessfully to api ");
+      
+      isAuthenticate=true;   //check 123...
+   
+      // res.redirect("/");
+      res.render("login");
+    
     })
     .catch(function (error) {
       console.log("I am from catch /api");
       console.log(error);
     });
 
-  res.redirect("/");
 });
 
 
@@ -353,7 +361,7 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
 
 
 // Route for video play
-app.post("/video", (req, res) => {
+app.post("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
   console.log(req.body);
 
   let videoId = req.body.extra_submit_param_videoId;

@@ -457,7 +457,6 @@ footer a {
   color: white;
   margin-right: 1rem;
   line-height: 1.5;
-  padding: 25px;
 }
 .careusel-cse .cards .card img {
   margin-top: 0.2rem;
@@ -587,7 +586,6 @@ footer a {
 
 .item-d {
   margin: 2rem;
-  border: 1px solid gray;
   padding: 2rem;
 }
 
@@ -626,20 +624,27 @@ footer a {
   cursor: pointer;
 }
 
-/* Styles for particular course when student clicks on GO TO course# sourceMappingURL=main.css.map */
-
-
-
-
-/* style for profile button after login */
-.myprofile-logo{
-  list-style: none;
-}
-.myprofile-logo>li{
-  /* display: none; */
+/* circular progress bar dashboard */
+.circular-prgress {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  background-color: #f711a3;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
 }
 
-.profile-dropdown-logo:hover{
-  cursor: pointer;
-  display: block;
+.circular-prgress:before {
+  content: "";
+  position: absolute;
+  height: 87%;
+  width: 87%;
+  background-color: white;
+  border-radius: 50%;
 }
+
+.value-container {
+  position: relative;
+  font-size: 50px;
+}/*# sourceMappingURL=main.css.map */

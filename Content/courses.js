@@ -392,6 +392,7 @@ const courses = [
     ],
   },
 
+  
   {
     id: "me01",
     courseName: "mechanical",
@@ -826,6 +827,7 @@ const courses = [
     ],
   },
 
+
   {
     id: "che01",
     courseName: "chemical",
@@ -848,7 +850,7 @@ const courses = [
             cardTitle: "Mass Transfer 1",
             desc: "This course will provide an overview of mass transfer operation at basic to an intermediate level. Coverage will be relatively broad. This course applies the concepts of diffusion and interphase mass transfer to the analysis of different mass transfer operations such as absorption and distillation. The goal is to provide students with the theoretical/analytical background to understand mass transfer operations as well as application and to tackle the sort of complex problems.",
             author: "Prof. Bishnupada Mandal",
-            imgurl: "c_img/c3.wepp",
+            imgurl: "c_img/c3.webp",
             playlistId: "PLwdnzlV3ogoVX_S_8DyKa7RudEazDL0o_",
           },
           {

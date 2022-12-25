@@ -42,11 +42,7 @@ app.route("/api")
         var pass = req.body.password;
         var name = req.body.name;
 
-        // console.log(newPRN);
-        // console.log(mail);
-        // console.log(pass);
-        // console.log(name);
-
+       
         const newStudent = new Student({
             PRN: newPRN,
             Email: mail,
@@ -89,16 +85,14 @@ app.post("/api/foundOne", (req, res) => {
     console.log(req.body);
     var isAuthenticate = false;
 
-    //console.log("Hello I am from FoundOne !");
 
     Student.findOne({ Email: emailApi }, (err, foundUser) => {
         if (!err) {
 
-            //console.log(foundUser);
             if (foundUser.Password === passApi) {
 
                 isAuthenticate = true;
-                //res.send("Hello I am from authetication");
+
                 res.send(isAuthenticate);
             }
             else {
@@ -116,7 +110,7 @@ app.post("/api/foundOne", (req, res) => {
 
 app.post("/api/course", (req, res) => {
 
-    console.log(req.body);
+
 
     const course = {
         courseName: req.body.courseName,
@@ -127,10 +121,23 @@ app.post("/api/course", (req, res) => {
         author: req.body.author
     }
 
-    //console.log(course);
-
 
     const filter = { Email: req.body.mail }
+
+
+    Student.findOne({},(err,foundCard)=>{
+
+        if(err){
+            console.log(err);
+        }
+        else{
+            console.log("I am from findOne of /api/course");
+            console.log(foundCard);
+        }
+
+
+    });
+
 
     // as we want to update an array of object that is courses hence this syntax is used and third param new : true means after updation return that object
 
@@ -179,14 +186,10 @@ app.post("/api/course/foundOne", (req, res) => {
 //used for removing particular course.
 app.post("/api/course/removeCourse",(req,res)=>{
 
-    console.log(req.body);
-    // const mail = req.body.mail;
-    // const cardId = req.body.cardId;
-
-    // console.log(mail);
-    // console.log(cardId);
-
-    const updateCourse = Student.findOneAndUpdate({Email : req.body.mail},{ $pull : {Courses : {cardId :req.body.cardId}}},(err,data)=>{
+    //console.log("this is reqBody object");
+    //console.log(req.body);
+   
+    const updateCourse = Student.findOneAndUpdate({Email : req.body.mail},{ $pull : {Courses : {cardId :req.body.cardId , itemId:req.body.itemId}}},(err,data)=>{
 
         if(!err){
             //console.log(data);

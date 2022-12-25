@@ -40,7 +40,6 @@
 
 .item-d {
   margin: 2rem;
-  border: 1px solid gray;
   padding: 2rem;
 }
 
@@ -88,4 +87,34 @@
   cursor: pointer;
 }
 
-/* Styles for particular course when student clicks on GO TO course */
+
+
+/* circular progress bar dashboard */
+
+
+.circular-prgress{
+
+  position: relative;
+  height: 200px;
+  width: 200px;
+  background-color: #f711a3;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.circular-prgress:before{
+
+  content: "";
+  position: absolute;
+  height: 87%;
+  width: 87%;
+  background-color: white;
+  border-radius: 50%;
+
+}
+
+.value-container{
+  position: relative;
+  font-size: 50px;
+}

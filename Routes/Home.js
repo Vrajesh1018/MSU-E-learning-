@@ -1,12 +1,23 @@
 const router = require('express').Router();
 const axios = require("axios");
-var isAuthenticateHome = false;
+var isAutheticate = false;
+
+
+
+function setAuthenticate(param){
+    isAutheticate = param;
+    return isAuthenticate;
+}
+
+
+
+setAuthenticate(false);
 
 // Home route
 router.get("/", (req, res) => {
     console.log(__dirname);
 
-    if (isAuthenticateHome) res.render("login", {});
+    if (isAutheticate) res.render("login", {});
     else res.render("home", {});
 
 });
@@ -28,11 +39,13 @@ router.post("/", (request, response) => {
         .then((res) => {
             console.log("I am from response SignIn");
             console.log(res.data);
-            isAuthenticateHome = res.data;
+            isAutheticate = res.data;
 
-            console.log("Is authenication done : "+isAuthenticateHome);
+            setAuthenticate(res.data);
 
-            if (isAuthenticateHome) {
+            console.log("Is authenication done : "+isAutheticate);
+
+            if (isAutheticate) {
                 response.render("login", {});
                 // response.redirect("/");
             } else {
@@ -50,5 +63,5 @@ router.post("/", (request, response) => {
 
 module.exports = {
     router: router,
-    isAuthenticate: isAuthenticateHome
+    isAuthenticate: isAutheticate
 }
