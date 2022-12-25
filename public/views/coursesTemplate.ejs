@@ -3,45 +3,47 @@
 
 <% courseArr.forEach((ele)=>{ %>
 
-  <section class="careusel-cse">
+<section class="careusel-cse">
 
-    <center><h1><%= ele.domain %></h1></center>
-  
+  <center>
+    <h1><%= ele.domain %></h1>
+  </center>
+
   <hr class="style-seven">
-  
+
   <div class="cards">
-  
+
     <% ele.cardlist.forEach((e)=>{ %>
 
-      <div class="card" style="width: 400px; height:400px">
-        <img src="/images/<%=e.imgurl %>" alt="thumbnail" style="width: 200px; height: 200px;" />
-        <h2><%= e.cardTitle %></h2>
-        <div class="card-content">
-          <p>
-           <%= e.desc.slice(0,80) + "..." %>
-          </p>
-          <h3><%= e.author %></h3>
-          <a href="/courses/<%= courseName %>/pcourse/<%= ele.itemid %>/student/<%= e.cardId %>"><button class="btn-1" >Explore</button></a>
-          
-          <form action="/courses/<%= courseName %>" method="post">
- 
-            <input type="hidden" name="extra_submit_param_itemid" value="<%=  ele.itemid %>">
-            <input type="hidden" name="extra_submit_param_cardId" value="<%=  e.cardId%>">
-            <input type="hidden" name ="extra_submit_param_cardTitle" value="<%= e.cardTitle%>">
-            <input type="hidden" name ="extra_submit_param_imgurl" value="<%= e.imgurl%>">
-            <input type="hidden" name ="extra_submit_param_author" value="<%= e.author%>">
+    <div class="card" style="width: 400px; height:400px">
+      <img src="/images/<%=e.imgurl %>" alt="thumbnail" style="width: 200px; height: 200px;" />
+      <h2><%= e.cardTitle %></h2>
+      <div class="card-content">
+        <p>
+          <%= e.desc.slice(0,80) + "..." %>
+        </p>
+        <h3><%= e.author %></h3>
+        <a href="/courses/<%= courseName %>/pcourse/<%= ele.itemid %>/student/<%= e.cardId %>"><button class="btn-1">Explore</button></a>
 
-            <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
+        <form action="/courses/<%= courseName %>" method="post">
 
-          </form>
+          <input type="hidden" name="extra_submit_param_itemid" value="<%=  ele.itemid %>">
+          <input type="hidden" name="extra_submit_param_cardId" value="<%=  e.cardId%>">
+          <input type="hidden" name="extra_submit_param_cardTitle" value="<%= e.cardTitle%>">
+          <input type="hidden" name="extra_submit_param_imgurl" value="<%= e.imgurl%>">
+          <input type="hidden" name="extra_submit_param_author" value="<%= e.author%>">
 
-        </div>
+          <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
+
+        </form>
+
       </div>
-   <% }); %>
-    
+    </div>
+    <% }); %>
+
   </div>
-  
-  </section>
+
+</section>
 
 <% }); %>
 
@@ -50,6 +52,8 @@
 
 <script src="/Javascript/sign-up.js"></script>
 <script src="/Javascript/navbar-scroll.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 </body>
+
 </html>

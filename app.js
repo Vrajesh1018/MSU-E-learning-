@@ -6,7 +6,7 @@ const axios = require("axios").default;
 const path = require("path");
 const courses = require("./Content/courses.js");
 const https = require("https");
-
+const swal = require("sweetalert");
 
 const app = express();
 
@@ -20,27 +20,19 @@ app.set("views", path.join(__dirname, "public/views"));
 
 app.use(express.static("public"));
 
-
-
-var USERMAIL = "";  // when user registered in course then add details of that course to that particular student in database we need this 
-
+var USERMAIL = ""; // when user registered in course then add details of that course to that particular student in database we need this
 
 // Home route
 app.get("/", (req, res) => {
-  console.log(__dirname);
-
   if (isAuthenticate) res.render("login", {});
   else res.render("home", {});
-
 });
 
 app.post("/", (request, response) => {
   const email = request.body.emailSignIn;
   const pass = request.body.passSignIn;
 
-
   USERMAIL = request.body.emailSignIn;
-
 
   axios
     .post("http://localhost:4000/api/foundOne", {
@@ -70,63 +62,52 @@ app.post("/", (request, response) => {
 
 // My Profile route get request
 app.get("/myprofile", (req, response) => {
+  let userCourseDetails = "";
 
-  let userCourseDetails="";
- 
-  
   if (isAuthenticate) {
-
     console.log(USERMAIL);
 
-    axios.post("http://localhost:4000/api/course/foundOne", {
-      mail: USERMAIL
-    })
+    axios
+      .post("http://localhost:4000/api/course/foundOne", {
+        mail: USERMAIL,
+      })
 
       .then((res) => {
-
         //console.log("myprofile response ");
         //  console.log(res.data.Courses);
         userCourseDetails = res.data.Courses;
         //console.log(userCourseDetails);
 
-        response.render("dashboard", {courseArr : userCourseDetails});
-
+        response.render("dashboard", { courseArr: userCourseDetails });
       })
       .catch((err) => {
         console.log("I am from catch");
         console.log(err);
-      })
-
-
+      });
   } else response.redirect("/");
 });
 
-
 //when user take out from the course then it make post request to the /myprofile route
-app.post("/myprofile",(req,response)=>{
-
+app.post("/myprofile", (req, response) => {
   console.log("I am from post request of /myprofile");
   console.log(req.body);
 
-  axios.post("http://localhost:4000/api/course/removeCourse",{
-    mail : USERMAIL,
-    cardId : req.body.extra_submit_param_cardId
-  })
+  axios
+    .post("http://localhost:4000/api/course/removeCourse", {
+      mail: USERMAIL,
+      cardId: req.body.extra_submit_param_cardId,
+    })
 
-  .then((res)=>{
-    console.log(res.data);
-  })
-  .catch((err)=>{
-    console.log(err);
-  });
-
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 
   // Again redirect back to /myprofile so it's work like refresh the page and course has been removed.
   response.redirect("/myprofile");
-
 });
-
-
 
 app.get("/logout", (req, res) => {
   isAuthenticate = false;
@@ -146,13 +127,12 @@ app.post("/register", (req, res) => {
 
   //USERMAIL = req.body.registerEmail;
 
-
   axios
     .post("http://localhost:4000/api", {
       prn: req.body.registerPrn,
       mail: req.body.registerEmail,
       password: req.body.registerPassword,
-      name: req.body.registerName
+      name: req.body.registerName,
     })
     .then(function (response) {
       // console.log(response);
@@ -166,11 +146,9 @@ app.post("/register", (req, res) => {
   res.redirect("/");
 });
 
-
 // Courses Route get request
 app.get("/courses/:newCourse", (req, res) => {
   if (isAuthenticate) {
-  
     let newCourse = req.params.newCourse;
     //    res.sendFile(path);
 
@@ -178,7 +156,6 @@ app.get("/courses/:newCourse", (req, res) => {
     console.log("Value of new Course is : " + newCourse);
 
     courses.forEach((element) => {
-
       //console.log(element.courseName);
 
       // string1.localeCompare(string2) == if both are equal then returns 0 and if if they are equal then add courses.items to it.
@@ -187,32 +164,21 @@ app.get("/courses/:newCourse", (req, res) => {
     });
 
     //console.log(courseDetails);
-
+    swal("Good job!", "Course is Registered", "success");
     res.render("coursesTemplate", {
       courseArr: courseDetails,
       courseName: newCourse,
     });
- 
-    }
-
-
-  else {
+  } else {
     res.redirect("/");
   }
-
-
 });
-
-
 
 // course Route post request when user registerd for course
 app.post("/courses/:newCourse", (req, res) => {
-
   let courseName = req.params.newCourse;
 
-
   // console.log(req.body);
-
 
   let itemid = req.body.extra_submit_param_itemid;
   let cardId = req.body.extra_submit_param_cardId;
@@ -220,45 +186,38 @@ app.post("/courses/:newCourse", (req, res) => {
   let imgurl = req.body.extra_submit_param_imgurl;
   let author = req.body.extra_submit_param_author;
 
-
   console.log("value of user mail is : " + USERMAIL);
 
   console.log(itemid);
   console.log(cardId);
 
-  axios.post("http://localhost:4000/api/course", {
-    courseName: courseName,
-    itemid: itemid,
-    cardId: cardId,
-    mail: USERMAIL,
-    cardTitle: carTitle,
-    imgurl: imgurl,
-    author: author
-
-  }).then(function (response) {
-
-    //console.log("from I am from axios post");
-    //console.log(response);
-
-  }).catch(function (err) {
-    console.log("I am from catch /api");
-    console.log(err);
-  })
+  axios
+    .post("http://localhost:4000/api/course", {
+      courseName: courseName,
+      itemid: itemid,
+      cardId: cardId,
+      mail: USERMAIL,
+      cardTitle: carTitle,
+      imgurl: imgurl,
+      author: author,
+    })
+    .then(function (response) {
+      //console.log("from I am from axios post");
+      //console.log(response);
+    })
+    .catch(function (err) {
+      console.log("I am from catch /api");
+      console.log(err);
+    });
 
   res.redirect("/courses/" + courseName);
-
 });
-
-
-
-
-
 
 //Particular course Dashboard
 app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
   let courseName = req.params.newCourse;
   let itemId = req.params.itemId;
-  let courseId = req.params.courseId;     // courseId === cardId
+  let courseId = req.params.courseId; // courseId === cardId
 
   let jsonObjectBody = "";
 
@@ -327,16 +286,15 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
   });
 });
 
-
 // Route for video play
 app.post("/video", (req, res) => {
   //console.log(req.body);
 });
 
 app.post("/courses/:courseId/pcourse/:itemId/student/:courseId", (req, res) => {
-  let videoId = req.body.exptra_submit_param_videoId;
-  let courseName = req.body.exptra_submit_param_courseName;
-  let courseId = req.body.exptra_submit_param_courseId;
+  let videoId = req.body.extra_submit_param_videoId;
+  let courseName = req.body.extra_submit_param_courseName;
+  let courseId = req.body.extra_submit_param_courseId;
   res.render("Pcourse", {
     videoId: videoId,
     itemsArray: jsonObject.items,
@@ -345,8 +303,6 @@ app.post("/courses/:courseId/pcourse/:itemId/student/:courseId", (req, res) => {
     itemId: itemId,
   });
 });
-
-
 
 app.listen(3000, () => {
   console.log("server has started on port 3000");
