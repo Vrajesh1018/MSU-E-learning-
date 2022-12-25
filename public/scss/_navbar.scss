@@ -26,6 +26,8 @@
     display: inline-flex;
     width: 90vw;
     justify-content: center;
+    font-size: large;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
   }
 
   .profile-btn {
@@ -49,17 +51,22 @@
     }
   }
   .courses {
+    font-size: larger;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    
     .courses-dropdown {
       display: none;
       position: absolute;
       border: 1px solid black;
-      border-radius: 0.4rem;
+      border-radius: 10px;
       margin-top: 0;
       z-index: 1;
-      padding-top: 2rem;
+      padding-top: 0rem;
+      list-style-type: none;
       background-color: white;
       color: $primary-color;
       ul {
+        
         li {
           line-height: 1.6;
           font-size: 1.05rem;
@@ -128,7 +135,7 @@
   align-items: center;
   z-index: 1;
   .popup-content {
-    height: 20.525rem;
+    height: 21rem;
     width: 31.25rem;
     background: #ea5d62d0;
     color: white;
@@ -140,11 +147,13 @@
     .link-button {
       background: none;
       border: none;
-      color: blue;
+      color: rgb(124, 4, 4);
       margin: 1%;
       cursor: pointer;
-      font-size: 1em;
-      font-family: serif;
+      font-size: 1.3em;
+      font-family: 'Courier New', Courier, monospace;
+      font-weight: bold;
+
     }
     a {
       text-decoration: none;
@@ -190,10 +199,16 @@
     .btn-signUp-popup {
       background-color: white;
       color: $primary-color;
-      &:hover {
-        background-color: whitesmoke;
-        color: rgba($color: $primary-color, $alpha: 0.5);
-      }
+      padding: 2%;
+      font-size: large;
+      border: none;
+      border-radius: 5px;
+    }
+    .btn-signUp-popup:hover {
+      color:rgb(117, 10, 10);
+      background-color: #e88083;
+      font-family: Arial, Helvetica, sans-serif;
+      transition: all .5s;
     }
     .close {
       position: absolute;
@@ -208,6 +223,17 @@
     }
   }
 }
+// .nav-links-dropdown-ul li:hover {
+//   background-color: #d7afb090;
+//   color: #3a2f44;
+//   border: 1px double navy;
+//   border-radius: 10px;
+//   transition: all 1s;
+//   list-style: none;
+// }
+.nav-links-dropdown-ul {
+  list-style: none;
+}
 // has to do for footer
 // .nav-links ul li a,
 // footer ul li a {
@@ -218,5 +244,8 @@
 //   border-bottom-width: 0;
 //   transition: color 0.5s, border-bottom 0.5s;
 // }
+.nav-links-dropdown-ul {
+  color: #a2a1a3;
+ }
 
 /* Dropdown CSS */
