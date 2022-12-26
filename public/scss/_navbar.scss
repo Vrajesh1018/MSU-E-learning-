@@ -28,9 +28,16 @@
     justify-content: center;
     font-size: large;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    &-ul li {
+      list-style: none;
+    }
   }
 
   .profile-btn {
+    .profileBtnPic {
+      font-size: 48px;
+      color: $primary-color;
+    }
     img {
       width: 3rem;
       height: 2.5rem;
@@ -40,6 +47,7 @@
       .profile-dropdown {
         display: block;
         position: absolute;
+        background-color: white;
       }
     }
     .profile-dropdown {
@@ -53,7 +61,7 @@
   .courses {
     font-size: larger;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    
+
     .courses-dropdown {
       display: none;
       position: absolute;
@@ -66,8 +74,8 @@
       background-color: white;
       color: $primary-color;
       ul {
-        
         li {
+          list-style: none;
           line-height: 1.6;
           font-size: 1.05rem;
           font-weight: 300;
@@ -95,6 +103,9 @@
   &.scrolled {
     background-color: $primary-color !important;
     transition: background-color 200ms linear;
+    .profileBtnPic {
+      color: white;
+    }
     h2 > a {
       color: white !important;
     }
@@ -104,20 +115,38 @@
   }
 }
 
-.nav-links-ul > li {
-  list-style: none;
-  padding-inline: 1rem;
-  display: inline-block;
-  a {
+.nav-links-ul {
+  .btn-2 {
+    -webkit-border-radius: 22;
+    -moz-border-radius: 22;
+    border-radius: 22px;
+    color: #ffffff;
+    font-size: 20px;
+    background: #ea5d61;
+    padding: 10px 20px 10px 20px;
+    border: solid #ffffff 1px;
     text-decoration: none;
-    color: #a2a1a3;
-    font-weight: 500;
-    border-bottom: none;
-    border-bottom-width: 0;
-    transition: color 0.5s, border-bottom 0.5s;
     &:hover {
-      border-bottom: 1px solid $primary-color;
-      color: black;
+      background: #ea5d61;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+  & > li {
+    list-style: none;
+    padding-inline: 1rem;
+    display: inline-block;
+    a {
+      text-decoration: none;
+      color: #a2a1a3;
+      font-weight: 500;
+      border-bottom: none;
+      border-bottom-width: 0;
+      transition: color 0.5s, border-bottom 0.5s;
+      &:hover {
+        border-bottom: 1px solid $primary-color;
+        color: black;
+      }
     }
   }
 }
@@ -151,9 +180,8 @@
       margin: 1%;
       cursor: pointer;
       font-size: 1.3em;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: "Courier New", Courier, monospace;
       font-weight: bold;
-
     }
     a {
       text-decoration: none;
@@ -205,10 +233,10 @@
       border-radius: 5px;
     }
     .btn-signUp-popup:hover {
-      color:rgb(117, 10, 10);
+      color: rgb(117, 10, 10);
       background-color: #e88083;
       font-family: Arial, Helvetica, sans-serif;
-      transition: all .5s;
+      transition: all 0.5s;
     }
     .close {
       position: absolute;
@@ -246,6 +274,10 @@
 // }
 .nav-links-dropdown-ul {
   color: #a2a1a3;
- }
+}
 
 /* Dropdown CSS */
+.fontLarger {
+  font-size: larger;
+  color: $primary-color;
+}

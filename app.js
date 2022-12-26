@@ -6,7 +6,6 @@ const axios = require("axios").default;
 const path = require("path");
 const courses = require("./Content/courses.js");
 const https = require("https");
-const swal = require("sweetalert");
 
 const app = express();
 
@@ -22,8 +21,7 @@ app.use(express.static("public"));
 
 var CURRENTPLAYLISTID = "";
 
-
-var USERMAIL = "";  // when user registered in course then add details of that course to that particular student in database we need this 
+var USERMAIL = ""; // when user registered in course then add details of that course to that particular student in database we need this
 
 /////////////////////////// Routes Separation /////////////////////////////////////////////
 
@@ -52,8 +50,6 @@ app.use("/video",videoRoute);
 */
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 // Home route
 app.get("/", (req, res) => {
@@ -93,15 +89,11 @@ app.post("/", (request, response) => {
     });
 });
 
-
 ///////////////////////////
-
 
 // My Profile route get request
 app.get("/myprofile", (req, response) => {
-
   let userCourseDetails = "";
-
 
   if (isAuthenticate) {
     console.log(USERMAIL);
@@ -112,11 +104,9 @@ app.get("/myprofile", (req, response) => {
       })
 
       .then((res) => {
-
         userCourseDetails = res.data.Courses;
 
         response.render("dashboard", { courseArr: userCourseDetails });
-
       })
       .catch((err) => {
         console.log("I am from catch");
@@ -127,22 +117,16 @@ app.get("/myprofile", (req, response) => {
 
 // when user take out from the course then it make post request to the /myprofile route
 app.post("/myprofile", (req, response) => {
-
   //console.log("I am from post request of /myprofile");
   //console.log(req.body);
 
-  axios.post("http://localhost:4000/api/course/removeCourse", {
-    mail: USERMAIL,
-    cardId: req.body.extra_submit_param_cardId,
-    itemId : req.body.extra_submit_param_itemId
-  })
-
-    .then((res) => {
-      console.log(res.data);
+  axios
+    .post("http://localhost:4000/api/course/removeCourse", {
+      mail: USERMAIL,
+      cardId: req.body.extra_submit_param_cardId,
+      itemId: req.body.extra_submit_param_itemId,
     })
-    .catch((err) => {
-      console.log(err);
-    });
+
     .then((res) => {
       console.log(res.data);
     })
@@ -159,14 +143,11 @@ app.get("/logout", (req, res) => {
   res.redirect("/");
 });
 
-
 // Register Route
 app.get("/register", (req, res) => {
-
   res.render("register");
   //res.sendFile(__dirname + "/register.html");
 });
-
 
 app.post("/register", (req, res) => {
   console.log("Hii I Am in /register post ..");
@@ -186,24 +167,21 @@ app.post("/register", (req, res) => {
     .then(function (response) {
       // console.log(response);
       console.log("JSON OBJECT send sucessfully to api ");
-      
-      isAuthenticate=true;   //check 123...
-   
+
+      isAuthenticate = true; //check 123...
+
       // res.redirect("/");
       res.render("login");
-    
     })
     .catch(function (error) {
       console.log("I am from catch /api");
       console.log(error);
     });
-
 });
 
 // Courses Route get request
 app.get("/courses/:newCourse", (req, res) => {
   if (isAuthenticate) {
-
     let newCourse = req.params.newCourse;
     //    res.sendFile(path);
 
@@ -222,11 +200,7 @@ app.get("/courses/:newCourse", (req, res) => {
       courseArr: courseDetails,
       courseName: newCourse,
     });
-
-  }
-
-
-  else {
+  } else {
     res.redirect("/");
   }
 });
@@ -269,9 +243,6 @@ app.post("/courses/:newCourse", (req, res) => {
 
   res.redirect("/courses/" + courseName);
 });
-
-
-
 
 //Particular course Dashboard
 app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
@@ -333,81 +304,71 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
         courseId: courseId,
         itemId: itemId,
       });
-
-
     });
   });
-
-
 });
-
 
 // Route for video play
-app.post("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
-  console.log(req.body);
+app.post(
+  "/courses/:newCourse/pcourse/:itemId/student/:courseId",
+  (req, res) => {
+    console.log(req.body);
 
-  let videoId = req.body.extra_submit_param_videoId;
-  let courseName = req.body.extra_submit_param_courseName;
-  let courseId = req.body.extra_submit_param_courseId;
+    let videoId = req.body.extra_submit_param_videoId;
+    let courseName = req.body.extra_submit_param_courseName;
+    let courseId = req.body.extra_submit_param_courseId;
 
-  let itemId = req.params.itemId;
+    let itemId = req.params.itemId;
 
-  console.log("video ID : " + videoId);
-  console.log("Item ID : " + itemId);
-  console.log("courseName ID : " + courseName);
+    console.log("video ID : " + videoId);
+    console.log("Item ID : " + itemId);
+    console.log("courseName ID : " + courseName);
 
+    let playlistURL =
+      "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
+      CURRENTPLAYLISTID +
+      "&key=" +
+      process.env.API_KEY;
 
-  let playlistURL =
-    "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
-    CURRENTPLAYLISTID +
-    "&key=" +
-    process.env.API_KEY;
+    console.log(CURRENTPLAYLISTID);
 
+    https.get(playlistURL, (response) => {
+      //Intialise our JSON object
+      jsonObjectBody = "";
 
-  console.log(CURRENTPLAYLISTID);
-
-
-  https.get(playlistURL, (response) => {
-    //Intialise our JSON object
-    jsonObjectBody = "";
-
-    response.on("data", (chunk) => {
-      jsonObjectBody += chunk;
-    });
-
-    response.on("end", () => {
-      let jsonObject = JSON.parse(jsonObjectBody);
-
-      // It's working correctly
-      // console.log(jsonObject.items);
-
-      // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
-      let nextPageToken = jsonObject.nextPageToken;
-
-      let itemLength = jsonObject.items.length;
-
-      // console.log(itemLength);
-
-      for (let i = 0; i < itemLength; i++) {
-        // if(jsonObject.items[i].snippet.resourceId.videoId==videoId)
-        //console.log(jsonObject.items[i].snippet.title);
-      }
-
-
-      res.render("Pcourse", {
-        videoId: videoId,
-        itemsArray: jsonObject.items,
-        courseName: courseName,
-        courseId: courseId,
-        itemId: itemId,
+      response.on("data", (chunk) => {
+        jsonObjectBody += chunk;
       });
 
+      response.on("end", () => {
+        let jsonObject = JSON.parse(jsonObjectBody);
 
+        // It's working correctly
+        // console.log(jsonObject.items);
 
+        // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
+        let nextPageToken = jsonObject.nextPageToken;
+
+        let itemLength = jsonObject.items.length;
+
+        // console.log(itemLength);
+
+        for (let i = 0; i < itemLength; i++) {
+          // if(jsonObject.items[i].snippet.resourceId.videoId==videoId)
+          //console.log(jsonObject.items[i].snippet.title);
+        }
+
+        res.render("Pcourse", {
+          videoId: videoId,
+          itemsArray: jsonObject.items,
+          courseName: courseName,
+          courseId: courseId,
+          itemId: itemId,
+        });
+      });
     });
-  });
-});
-
+  }
+);
 
 // Route for video play
 app.post("/video", (req, res) => {
@@ -415,7 +376,6 @@ app.post("/video", (req, res) => {
 });
 
 // });
-
 
 app.post("/courses/:courseId/pcourse/:itemId/student/:courseId", (req, res) => {
   let videoId = req.body.extra_submit_param_videoId;

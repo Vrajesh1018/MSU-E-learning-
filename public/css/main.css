@@ -77,6 +77,13 @@
   font-size: large;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+.navbar .nav-links-ul li {
+  list-style: none;
+}
+.navbar .profile-btn .profileBtnPic {
+  font-size: 48px;
+  color: #ea5d61;
+}
 .navbar .profile-btn img {
   width: 3rem;
   height: 2.5rem;
@@ -85,11 +92,14 @@
 .navbar .profile-btn:hover .profile-dropdown {
   display: block;
   position: absolute;
+  background-color: white;
 }
 .navbar .profile-btn .profile-dropdown {
   border: 1px solid black;
   padding: 0.5rem;
   border-radius: 0.4rem;
+  display: none;
+  z-index: 1;
 }
 .navbar .courses {
   font-size: larger;
@@ -108,6 +118,7 @@
   color: #ea5d61;
 }
 .navbar .courses .courses-dropdown ul li {
+  list-style: none;
   line-height: 1.6;
   font-size: 1.05rem;
   font-weight: 300;
@@ -129,6 +140,9 @@
   background-color: #ea5d61 !important;
   transition: background-color 200ms linear;
 }
+.navbar.scrolled .profileBtnPic {
+  color: white;
+}
 .navbar.scrolled h2 > a {
   color: white !important;
 }
@@ -136,6 +150,20 @@
   color: white !important;
 }
 
+.nav-links-ul .btn-2 {
+  border-radius: 22px;
+  color: #ffffff;
+  font-size: 20px;
+  background: #ea5d61;
+  padding: 10px 20px 10px 20px;
+  border: solid #ffffff 1px;
+  text-decoration: none;
+}
+.nav-links-ul .btn-2:hover {
+  background: #ea5d61;
+  text-decoration: none;
+  cursor: pointer;
+}
 .nav-links-ul > li {
   list-style: none;
   padding-inline: 1rem;
@@ -263,6 +291,11 @@
 }
 
 /* Dropdown CSS */
+.fontLarger {
+  font-size: larger;
+  color: #ea5d61;
+}
+
 .home-page .landing-page {
   display: grid;
   grid-template-columns: repeat(2, 45vw);
@@ -286,6 +319,7 @@
 }
 .home-page .landing-page .landing-page-information p {
   margin-top: 1.5rem;
+  font-size: large;
   color: #a2a1a3;
 }
 .home-page .landing-page .landing-page-information button#submit-signUp {
@@ -354,14 +388,7 @@
 .home-page .banner div {
   width: 43%;
 }
-
-.sign-in-control input:focus + label span,
-.sign-in-control input:valid + label span {
-  color: white;
-  transform: translateY(-2rem);
-}
-
-.btn-1 {
+.home-page .banner .btn-1 {
   border-radius: 28px;
   color: #ea5d61;
   font-size: 20px;
@@ -372,13 +399,12 @@
   border: none;
   margin-right: 1.5rem;
 }
-.btn-1:hover {
+.home-page .banner .btn-1:hover {
   background: #ffffff;
   text-decoration: none;
   cursor: pointer;
 }
-
-.btn-2 {
+.home-page .banner .btn-2 {
   border-radius: 22px;
   color: #ffffff;
   font-size: 20px;
@@ -387,10 +413,16 @@
   border: solid #ffffff 1px;
   text-decoration: none;
 }
-.btn-2:hover {
+.home-page .banner .btn-2:hover {
   background: #ea5d61;
   text-decoration: none;
   cursor: pointer;
+}
+
+.sign-in-control input:focus + label span,
+.sign-in-control input:valid + label span {
+  color: white;
+  transform: translateY(-2rem);
 }
 
 footer {
@@ -487,11 +519,9 @@ pre {
   }
 }
 .careusel-cse {
+  overflow: visible;
   width: 85%;
   margin: auto;
-}
-.careusel-cse .cards {
-  padding: 1rem;
 }
 .careusel-cse .cards .card {
   transform: perspective(1px) translateZ(0);
@@ -500,19 +530,34 @@ pre {
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
-  margin: auto;
+  min-height: 400px;
+  margin: 1rem;
   justify-content: center;
   align-items: center;
-  background-color: #ea5d61;
+  background-color: rgba(234, 93, 97, 0.85);
+  transition: all 0.5s;
   font-family: sans-serif;
   flex-direction: column;
   color: white;
   margin-right: 1rem;
   line-height: 1.5;
+  border-radius: 0.5rem;
+}
+.careusel-cse .cards .card .card-img-div {
+  overflow: hidden;
 }
 .careusel-cse .cards .card img {
-  margin-top: 0.2rem;
   border-radius: 0.5rem;
+  width: 100%;
+  min-height: 200px;
+  aspect-ratio: 3/2;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.careusel-cse .cards .card img:hover {
+  scale: 1.5;
 }
 .careusel-cse .cards .card:hover, .careusel-cse .cards .card:focus, .careusel-cse .cards .card:active {
   -webkit-animation-name: hvr-bob-float, hvr-bob;
@@ -530,11 +575,39 @@ pre {
   -webkit-animation-direction: normal, alternate;
   animation-direction: normal, alternate;
   box-shadow: 5px 15px 21px 5px rgba(0, 0, 0, 0.75);
+  background-color: #ea5d61;
 }
-.careusel-cse .cards .card .card-content {
-  margin-left: 0.2rem;
+.careusel-cse .cards:last-child {
+  position: relative;
+  margin-inline: auto;
+  margin-top: auto;
 }
-.careusel-cse hr.style-seven {
+.careusel-cse .cards:last-child .btn-1 {
+  border-radius: 28px;
+  color: #ea5d61;
+  font-size: 20px;
+  background: #ffffff;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  position: absolute;
+  bottom: 0.5rem;
+  translate: -50px 0;
+}
+.careusel-cse .cards:last-child .btn-1:hover {
+  background: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+}
+.careusel-cse .cards .card-content {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+hr.style-seven {
   overflow: visible;
   /* For IE */
   height: 30px;
@@ -543,7 +616,7 @@ pre {
   border-width: 1px 0 0 0;
   border-radius: 20px;
 }
-.careusel-cse hr.style-seven:before {
+hr.style-seven:before {
   /* Not really supposed to work, but does */
   display: block;
   content: "";
@@ -577,6 +650,7 @@ pre {
   text-decoration: none;
 }
 .container-pcourse .container-listOfVideos button {
+  min-width: 100%;
   border: none;
   padding: 0.5rem;
   line-height: 1.5;
@@ -598,6 +672,7 @@ pre {
 
 /*   Dashboard Styles */
 .dashboard-container {
+  overflow: hidden;
   display: flex;
 }
 .dashboard-container a,
@@ -709,7 +784,30 @@ a {
   text-decoration: none;
 }
 
-/* Styles for particular course when student clicks on GO TO course */
+/* circular progress bar dashboard */
+.circular-prgress {
+  position: relative;
+  height: 200px;
+  width: 200px;
+  background-color: #f711a3;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
+.circular-prgress:before {
+  content: "";
+  position: absolute;
+  height: 87%;
+  width: 87%;
+  background-color: white;
+  border-radius: 50%;
+}
+
+ul li {
+  text-decoration: none;
+}
+
 .value-container {
   position: relative;
   font-size: 50px;

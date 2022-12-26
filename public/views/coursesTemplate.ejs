@@ -15,27 +15,30 @@
 
     <% ele.cardlist.forEach((e)=>{ %>
 
-      <div class="card" style="width: 400px; height:400px">
-        <img src="/images/<%=e.imgurl %>" alt="thumbnail" id="course_img" style="height: 200px;width: 200px;"/>
-        <h2><%= e.cardTitle %></h2>
-        <div class="card-content">
-          <p>
-           <%= e.desc.slice(0,80) + "..." %>
-          </p>
-          <h3><%= e.author %></h3>
-          <div style="display: inline-block;"><form action="/courses/<%= courseName %>" method="post">
- 
+    <div class="card">
+      <div class="card-img-div">
+        <img src="/images/<%=e.imgurl %>" alt="thumbnail" id="course_img" />
+      </div>
+      <div class="card-content">
+        <center>
+          <h3><%= e.cardTitle %></h3>
+          <p>@<%= e.author %></p>
+        </center>
+        <div style="display: inline-block;">
+          <form action="/courses/<%= courseName %>" method="post">
+
             <input type="hidden" name="extra_submit_param_itemid" value="<%=  ele.itemid %>">
             <input type="hidden" name="extra_submit_param_cardId" value="<%=  e.cardId%>">
-            <input type="hidden" name ="extra_submit_param_cardTitle" value="<%= e.cardTitle%>">
-            <input type="hidden" name ="extra_submit_param_imgurl" value="<%= e.imgurl%>">
-            <input type="hidden" name ="extra_submit_param_author" value="<%= e.author%>">
-            <input type="hidden" name ="extra_submit_param_courseName" value="<%= courseName%>">
+            <input type="hidden" name="extra_submit_param_cardTitle" value="<%= e.cardTitle%>">
+            <input type="hidden" name="extra_submit_param_imgurl" value="<%= e.imgurl%>">
+            <input type="hidden" name="extra_submit_param_author" value="<%= e.author%>">
+            <input type="hidden" name="extra_submit_param_courseName" value="<%= courseName%>">
 
 
-          <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
+            <button type="submit" id="courseRegisterBtn" class="btn-1">Register</button>
 
-          </form></div>
+          </form>
+        </div>
 
       </div>
     </div>

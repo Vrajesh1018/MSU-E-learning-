@@ -1,5 +1,6 @@
 /*   Dashboard Styles */
 .dashboard-container {
+  overflow: hidden;
   a,
   a:active,
   a:visited {
@@ -138,12 +139,9 @@ a {
   text-decoration: none;
 }
 
-
 /* circular progress bar dashboard */
 
-
-.circular-prgress{
-
+.circular-prgress {
   position: relative;
   height: 200px;
   width: 200px;
@@ -153,15 +151,13 @@ a {
   place-items: center;
 }
 
-.circular-prgress:before{
-
+.circular-prgress:before {
   content: "";
   position: absolute;
   height: 87%;
   width: 87%;
   background-color: white;
   border-radius: 50%;
-
 }
 
 ul {
@@ -170,7 +166,7 @@ ul {
   }
 }
 
-.value-container{
+.value-container {
   position: relative;
   font-size: 50px;
 }

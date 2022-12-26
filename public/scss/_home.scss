@@ -21,6 +21,7 @@
       }
       p {
         margin-top: 1.5rem;
+        font-size: large;
         color: #a2a1a3;
       }
       button#submit-signUp {
@@ -94,6 +95,40 @@
     div {
       width: 43%;
     }
+    .btn-1 {
+      -webkit-border-radius: 28;
+      -moz-border-radius: 28;
+      border-radius: 28px;
+      color: #ea5d61;
+      font-size: 20px;
+      background: #ffffff;
+      padding: 10px 20px 10px 20px;
+      text-decoration: none;
+      outline: none;
+      border: none;
+      margin-right: 1.5rem;
+      &:hover {
+        background: #ffffff;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
+    .btn-2 {
+      -webkit-border-radius: 22;
+      -moz-border-radius: 22;
+      border-radius: 22px;
+      color: #ffffff;
+      font-size: 20px;
+      background: #ea5d61;
+      padding: 10px 20px 10px 20px;
+      border: solid #ffffff 1px;
+      text-decoration: none;
+      &:hover {
+        background: #ea5d61;
+        text-decoration: none;
+        cursor: pointer;
+      }
+    }
   }
 }
 
@@ -130,38 +165,3 @@
 }
 
 // Buttons
-.btn-1 {
-  -webkit-border-radius: 28;
-  -moz-border-radius: 28;
-  border-radius: 28px;
-  color: #ea5d61;
-  font-size: 20px;
-  background: #ffffff;
-  padding: 10px 20px 10px 20px;
-  text-decoration: none;
-  outline: none;
-  border: none;
-  margin-right: 1.5rem;
-  &:hover {
-    background: #ffffff;
-    text-decoration: none;
-    cursor: pointer;
-  }
-}
-
-.btn-2 {
-  -webkit-border-radius: 22;
-  -moz-border-radius: 22;
-  border-radius: 22px;
-  color: #ffffff;
-  font-size: 20px;
-  background: #ea5d61;
-  padding: 10px 20px 10px 20px;
-  border: solid #ffffff 1px;
-  text-decoration: none;
-  &:hover {
-    background: #ea5d61;
-    text-decoration: none;
-    cursor: pointer;
-  }
-}
