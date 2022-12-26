@@ -6,7 +6,6 @@ const axios = require("axios").default;
 const path = require("path");
 const courses = require("./Content/courses.js");
 const https = require("https");
-const swal = require("sweetalert");
 
 const app = express();
 
@@ -67,6 +66,8 @@ app.post("/", (request, response) => {
 
   USERMAIL = request.body.emailSignIn;
 
+  
+
   axios
     .post("http://localhost:4000/api/foundOne", {
       email: request.body.emailSignIn,
@@ -115,7 +116,7 @@ app.get("/myprofile", (req, response) => {
 
         userCourseDetails = res.data.Courses;
 
-        response.render("dashboard", { courseArr: userCourseDetails });
+        response.render("dashboard", { courseArr: userCourseDetails, totalBranches: courses.length });
 
       })
       .catch((err) => {
@@ -134,15 +135,9 @@ app.post("/myprofile", (req, response) => {
   axios.post("http://localhost:4000/api/course/removeCourse", {
     mail: USERMAIL,
     cardId: req.body.extra_submit_param_cardId,
-    itemId : req.body.extra_submit_param_itemId
+    itemId: req.body.extra_submit_param_itemId
   })
 
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
     .then((res) => {
       console.log(res.data);
     })
@@ -174,7 +169,7 @@ app.post("/register", (req, res) => {
 
   //console.log(req.body);
 
-  //USERMAIL = req.body.registerEmail;
+  USERMAIL = req.body.registerEmail;
 
   axios
     .post("http://localhost:4000/api", {
@@ -186,12 +181,12 @@ app.post("/register", (req, res) => {
     .then(function (response) {
       // console.log(response);
       console.log("JSON OBJECT send sucessfully to api ");
-      
-      isAuthenticate=true;   //check 123...
-   
+
+      isAuthenticate = true;   //check 123...
+
       // res.redirect("/");
       res.render("login");
-    
+
     })
     .catch(function (error) {
       console.log("I am from catch /api");
@@ -267,7 +262,9 @@ app.post("/courses/:newCourse", (req, res) => {
       console.log(err);
     });
 
-  res.redirect("/courses/" + courseName);
+    let videoUrl = "/courses/"+courseName+"/pcourse/"+itemid+"/student/"+cardId;
+
+  res.redirect(videoUrl);
 });
 
 
@@ -346,67 +343,69 @@ app.get("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
 app.post("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => {
   console.log(req.body);
 
-  let videoId = req.body.extra_submit_param_videoId;
-  let courseName = req.body.extra_submit_param_courseName;
-  let courseId = req.body.extra_submit_param_courseId;
 
-  let itemId = req.params.itemId;
+    let videoId = req.body.extra_submit_param_videoId;
+    let courseName = req.body.extra_submit_param_courseName;
+    let courseId = req.body.extra_submit_param_courseId;
 
-  console.log("video ID : " + videoId);
-  console.log("Item ID : " + itemId);
-  console.log("courseName ID : " + courseName);
+    let itemId = req.params.itemId;
 
-
-  let playlistURL =
-    "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
-    CURRENTPLAYLISTID +
-    "&key=" +
-    process.env.API_KEY;
+    console.log("video ID : " + videoId);
+    console.log("Item ID : " + itemId);
+    console.log("courseName ID : " + courseName);
 
 
-  console.log(CURRENTPLAYLISTID);
+    let playlistURL =
+      "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
+      CURRENTPLAYLISTID +
+      "&key=" +
+      process.env.API_KEY;
 
 
-  https.get(playlistURL, (response) => {
-    //Intialise our JSON object
-    jsonObjectBody = "";
-
-    response.on("data", (chunk) => {
-      jsonObjectBody += chunk;
-    });
-
-    response.on("end", () => {
-      let jsonObject = JSON.parse(jsonObjectBody);
-
-      // It's working correctly
-      // console.log(jsonObject.items);
-
-      // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
-      let nextPageToken = jsonObject.nextPageToken;
-
-      let itemLength = jsonObject.items.length;
-
-      // console.log(itemLength);
-
-      for (let i = 0; i < itemLength; i++) {
-        // if(jsonObject.items[i].snippet.resourceId.videoId==videoId)
-        //console.log(jsonObject.items[i].snippet.title);
-      }
+    console.log(CURRENTPLAYLISTID);
 
 
-      res.render("Pcourse", {
-        videoId: videoId,
-        itemsArray: jsonObject.items,
-        courseName: courseName,
-        courseId: courseId,
-        itemId: itemId,
+    https.get(playlistURL, (response) => {
+      //Intialise our JSON object
+      jsonObjectBody = "";
+
+      response.on("data", (chunk) => {
+        jsonObjectBody += chunk;
       });
 
+      response.on("end", () => {
+        let jsonObject = JSON.parse(jsonObjectBody);
+
+        // It's working correctly
+        // console.log(jsonObject.items);
+
+        // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
+        let nextPageToken = jsonObject.nextPageToken;
+
+        let itemLength = jsonObject.items.length;
+
+        // console.log(itemLength);
+
+        for (let i = 0; i < itemLength; i++) {
+          // if(jsonObject.items[i].snippet.resourceId.videoId==videoId)
+          //console.log(jsonObject.items[i].snippet.title);
+        }
 
 
+        res.render("Pcourse", {
+          videoId: videoId,
+          itemsArray: jsonObject.items,
+          courseName: courseName,
+          courseId: courseId,
+          itemId: itemId,
+        });
+
+
+
+      });
     });
+
   });
-});
 
 
 // Route for video play
@@ -417,18 +416,6 @@ app.post("/video", (req, res) => {
 // });
 
 
-app.post("/courses/:courseId/pcourse/:itemId/student/:courseId", (req, res) => {
-  let videoId = req.body.extra_submit_param_videoId;
-  let courseName = req.body.extra_submit_param_courseName;
-  let courseId = req.body.extra_submit_param_courseId;
-  res.render("Pcourse", {
-    videoId: videoId,
-    itemsArray: jsonObject.items,
-    courseName: courseName,
-    courseId: courseId,
-    itemId: itemId,
-  });
-});
 
 app.listen(3000, () => {
   console.log("server has started on port 3000");

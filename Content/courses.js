@@ -1,4 +1,5 @@
 const courses = [
+  
   {
     id: "cs01",
     courseName: "cse",
@@ -779,7 +780,7 @@ const courses = [
             cardTitle: "AutoCAD 2D Full Tutorial",
             desc: "This is a card related to university courses",
             author: "Deepak Verma",
-            imgurl: "me_img/mx13.png",
+            imgurl: "me_img/mx13.jfif",
             playlistId: "PLMtzJAOD3B7Z0kAGbqdVPZuT91pNIsF-R",
           },
           {
@@ -795,7 +796,7 @@ const courses = [
             cardTitle: "Basic Thermodynamics",
             desc: "This is a card related to university courses",
             author: "Unacademy",
-            imgurl: "me_img/mx15.png",
+            imgurl: "me_img/mx15.jfif",
             playlistId: "PLiSPNzs4fD9snxh0jHSuk3HuqoMhW24VO",
           },
           {
@@ -1090,6 +1091,7 @@ const courses = [
       },
     ],
   },
+  
   {
     id: "ele01",
     courseName: "electrical",
@@ -1340,6 +1342,7 @@ const courses = [
       },
     ],
   },
+
   {
     id: "ce01",
     courseName: "civil",

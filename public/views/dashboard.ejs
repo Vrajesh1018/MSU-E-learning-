@@ -17,7 +17,8 @@
 
     <div class="item side-nav">
 
-      <div class="side-nav-item"><a href="#"><i class="fa-solid fa-chart-simple"></i>&nbsp;&nbsp; Dashboard</a></div>
+      <div class="side-nav-item"><a href="/"><i class="fa fa-home" aria-hidden="true"></i>
+        &nbsp;&nbsp;Home</a></div>
       <div class="side-nav-item"><a href="/myprofile/mydetails"><i class="fa-solid fa-user"></i>&nbsp;&nbsp; My profile </a></div>
       <div class="side-nav-item"><a href="#!" id="side-nav-dropdown-btn"><i class="fa-solid fa-angle-down"></i>&nbsp;&nbsp; Courses</a>
         <div class="side-nav-course-dropdown" id="side-nav-course-dropdown">
@@ -41,29 +42,34 @@
       <div class="dashboard-content">
 
         <div class="dashboard-content-item-1">
+
           <div class="item-d">
             <i class="fa-duotone fa-chart-mixed"></i>
             
             <div class="circular-prgress" id="circular-progress1">
               <div class="value-container" id="value-container1">0%</div>
+              
               <input type="hidden" id="course-count1" value="<%= courseArr.length %>">
             </div>
 
             <p> Courses Registered</p>
-            <p>16 Hours</p>
+           
           </div>
+
           <div class="item-d">
             
             <div class="circular-prgress" id="cicular-progress2">
               <div class="value-container" id="value-container2">0%</div>
-              <input type="hidden" id="course-count2" value="<%= courseArr.length %>">
             </div>
 
-            <p>Total Courses Registered</p>
+            <p>Total branches available</p>
+            <input type="hidden" id="course-count2" value="<%= totalBranches %>">
             <p>
-              <%= courseArr.length %>
+              <%= totalBranches %>
             </p>
           </div>
+
+
           <div class="item-d">
 
             <div class="circular-prgress" id="circular-progress3">
@@ -71,8 +77,8 @@
               <input type="hidden" id="course-count3" value="<%= courseArr.length %>">
             </div>
 
-            <p>Completed Courses</p>
-            <p>5</p>
+            <p>Total students registered </p>
+            <p>8</p>
           </div>
 
         </div>
@@ -103,7 +109,7 @@
             <div><span>By <%= ele.author %>
               </span></div>
 
-            <div><a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><button class="btn-dashboard"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i> GO to
+            <div><a href="/courses/<%=ele.courseName%>/pcourse/<%= ele.itemId%>/student/<%= ele.cardId %>"><button class="btn-dashboard"><i class="fa-sharp fa-solid fa-arrow-up-right-from-square"></i> watching
                 </button></a>
             </div>
 
@@ -112,6 +118,7 @@
               <form action="/myprofile" method="post"><a href=""><button class="btn-dashboard"> <i class="fa-sharp fa-solid fa-trash"></i> Take Out</button></a>
 
                 <input type="hidden" name="extra_submit_param_cardId" value="<%= ele.cardId %>">
+                <input type="hidden" name="extra_submit_param_itemId" value="<%= ele.itemId %>">
 
               </form>
             </div>
@@ -139,16 +146,60 @@
 
     <script>
 
+      // ************ first progressbar
+
       let pbar1 = document.getElementById("circular-progress1");
 
       let valueContainer1 = document.getElementById("value-container1");
 
       console.log(pbar1, valueContainer1);
 
+      
+      if(typeof document.getElementById("course-count1") != "undefined")
       valueContainer1.textContent = document.getElementById("course-count1").value;
+      else
+      valueContainer1.textContent = 0;
+
       
       pbar1.style.background=`conic-gradient( #f711a3 ${document.getElementById("course-count1").value * 3.6}deg,
       #FFC0CB ${document.getElementById("course-count1").value * 3.6}deg )`
+
+      // ********** second progressbar
+
+      let pbar2 = document.getElementById("cicular-progress2");
+
+      let valueContainer2 = document.getElementById("value-container2");
+
+      if(typeof document.getElementById("course-count2")!=undefined){
+        valueContainer2.textContent = document.getElementById("course-count2").value;
+      }
+      else
+      valueContainer2.textContent = 0;
+
+      pbar2.style.background=`conic-gradient( #f711a3 ${document.getElementById("course-count2").value * 5}deg,
+      #FFC0CB ${document.getElementById("course-count2").value * 5}deg )`
+
+      // **** third progressbar
+      
+      let pbar3 = document.getElementById("circular-progress3");
+
+      let valueContainer3 = document.getElementById("value-container3");
+
+      if(typeof document.getElementById("course-count3")!=undefined){
+        valueContainer3.textContent = 8;
+      }
+      else
+      valueContainer3.textContent = 0;
+
+      pbar3.style.background=`conic-gradient( #f711a3 ${8 * 5}deg,
+      #FFC0CB ${8 * 5}deg )`
+
+
+
+      
+
+
+
 
 
     </script>

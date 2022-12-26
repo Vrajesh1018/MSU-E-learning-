@@ -22,11 +22,11 @@
         <a href=""> Department</a>
         <div class="courses-dropdown">
           <ul class="nav-links-dropdown-ul">
-            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/CSE">CSE</a></li>
-            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/MECH">Mechanical</a></li>
-            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/CLE">Chemical</a></li>
-            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/CVL">Civil</a></li>
-            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/ELEC">Electrical</a></li>
+            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/CSE">dept of CSE</a></li>
+            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/MECH">dept of Mechanical</a></li>
+            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/CLE">dept of Chemical</a></li>
+            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/CVL">dept of Civil</a></li>
+            <li><a href="https://www.msubaroda.ac.in/academics/FTE/department/ELEC">dept of Electrical</a></li>
           </ul>
         </div>
       </li>
@@ -42,12 +42,11 @@
 <div class="popup" id="popup">
   <div class="popup-content">
 
+    <!-- <a href="#!"><img src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png" alt="Close" class="close" id="close"></a> -->
 
-    <h3>Sign In</h3>
-    <a href="#!"><img src="https://cdn3.iconfinder.com/data/icons/pyconic-icons-1-2/512/close-512.png" alt="Close" class="close" id="close"></a>
+    <!-- ************************************** old form code ****************************** -->
 
-
-    <form action="/" method="post">
+    <!-- <form action="/" method="post">
       <div class="sign-in-control">
         <input type="text" required name="emailSignIn">
         <label for="" style="color: white;">Your Email</label>
@@ -60,13 +59,45 @@
 
 
       <button type="submit" class="btn-signUp-popup" id="submit-signUp">Submit</button>
-    </form>
-    <form method="get" action="/register" class="inline">
+
+
+    </form> -->
+
+    <!-- <form method="get" action="/register" class="inline">
       <input type="hidden" name="extra_submit_param" value="extra_submit_value">
       <button type="submit" name="submit_param" value="submit_value" class="link-button">
         Don't have account ?
       </button>
 
-    </form>
+    </form> -->
+
+    <!-- ************************************************************************************* -->
+
+    <!-- ****************** new form code ************************ -->
+    <div class="box-container">
+      <div class="box" style="height: 410px;">
+        <form action="/" class="sign-up-form" method="post" autocomplete="off">
+          <h2>Login</h2>
+          <div class="inputBox">
+                      <input type="text" required name="emailSignIn">
+            <span>Your Email</span>
+            <i></i>
+          </div>
+          <div class="inputBox">
+                      <input type="password" required name="passSignIn">
+            <span>Your password</span>
+            <i></i>
+          </div>
+  
+          <div class="links">
+            <a href="/register">don't have account ? </a>
+          </div>
+          <input type="submit" value="Login">
+          <a href="#" id="close"><i class="fa fa-arrow-left" aria-hidden="true"></i>
+          </a>
+        </form>
+      </div>
+    </div>
+
   </div>
 </div>
