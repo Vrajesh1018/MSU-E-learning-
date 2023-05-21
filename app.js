@@ -7,7 +7,32 @@ const path = require("path");
 const courses = require("./Content/courses.js");
 const https = require("https");
 
+
+
+
 const app = express();
+
+//******** ************** passport Authentication ************* */
+
+/*
+
+const {passport,Student} = require("./middleware/authentication");
+
+
+app.use(session({
+  secret: "our little secret.",
+  resave: false,
+  saveUninitialized: false
+
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+*/
+
+// **********************************************************************8
+
 
 var isAuthenticate = false;
 
@@ -28,27 +53,27 @@ var USERMAIL = "";  // when user registered in course then add details of that c
 
 /// Importing all routes
 
-/*
 
-const homeRoute = require("./Routes/Home");
-const myprofileRoute = require("./Routes/Myprofile");
-const registerRoute = require("./Routes/Register");
-const pcourseRoute = require("./Routes/Pcourse");
-const videoRoute = require("./Routes/Video");
-const courseRoute = require("./Routes/Course");
+
+// const homeRoute = require("./Routes/Home");
+// const myprofileRoute = require("./Routes/Myprofile");
+// const registerRoute = require("./Routes/Register");
+// const pcourseRoute = require("./Routes/Pcourse");
+// const videoRoute = require("./Routes/Video");
+// const courseRoute = require("./Routes/Course");
 
 
 // middleware
 app.use(express.json());
 
-app.use("/",homeRoute.router);
-app.use("/courses/",courseRoute);
-app.use("/myprofile",myprofileRoute);
-app.use("/courses/:newCourse/pcourse/:itemId/student/:courseId",pcourseRoute);
-app.use("/register",registerRoute);
-app.use("/video",videoRoute);
+// app.use("/",homeRoute.router);
+// app.use("/courses/",courseRoute);
+// app.use("/myprofile",myprofileRoute);
+// app.use("/courses/:newCourse/pcourse/:itemId/student/:courseId",pcourseRoute);
+// app.use("/register",registerRoute);
+// app.use("/video",videoRoute);
 
-*/
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 

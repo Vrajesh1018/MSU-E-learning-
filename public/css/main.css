@@ -92,6 +92,10 @@
   border-radius: 0.4rem;
   display: none;
   z-index: 1;
+  background-color: white;
+}
+.navbar .profile-btn .profile-dropdown ul {
+  list-style: none;
 }
 .navbar .courses {
   font-size: larger;
@@ -130,6 +134,9 @@
 .navbar.scrolled {
   background-color: #ea5d61 !important;
   transition: background-color 200ms linear;
+}
+.navbar.scrolled .scrolled-profile {
+  color: white;
 }
 .navbar.scrolled h2 > a {
   color: white !important;
@@ -388,6 +395,25 @@
   cursor: pointer;
 }
 
+.btn-3 {
+  border: none;
+  outline: none;
+  padding: 11px 25px;
+  background: #ea5d61;
+  cursor: pointer;
+  border-radius: 4px;
+  font-weight: 600;
+  width: 100px;
+  margin-top: 10px;
+  text-align: center;
+  margin-left: 100px;
+}
+
+.profileBtn {
+  font-size: 48px;
+  color: red;
+}
+
 footer {
   display: flex;
   flex-direction: row;
@@ -498,14 +524,16 @@ pre {
   margin: auto;
   justify-content: center;
   align-items: center;
-  background-color: #ea5d61;
+  margin: 1rem;
+  background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(248, 6, 47, 0.927));
   font-family: sans-serif;
   flex-direction: column;
-  color: white;
+  color: black;
   margin-right: 1rem;
   line-height: 1.5;
 }
 .careusel-cse .cards .card img {
+  width: 100%;
   margin-top: 0.2rem;
   border-radius: 0.5rem;
 }
@@ -528,6 +556,9 @@ pre {
 }
 .careusel-cse .cards .card .card-content {
   margin-left: 0.2rem;
+}
+.careusel-cse .cards .card .card-content p {
+  color: rgb(91, 6, 6);
 }
 .careusel-cse hr.style-seven {
   overflow: visible;
@@ -573,13 +604,18 @@ pre {
 }
 .container-pcourse .container-listOfVideos button {
   border: none;
+  min-width: 100%;
   padding: 0.5rem;
   line-height: 1.5;
+  transition: 0.5s;
   font-size: 1.2rem;
   font-weight: normal;
   margin-bottom: 1rem;
   text-align: left;
   cursor: default;
+}
+.container-pcourse .container-listOfVideos button:hover {
+  background-color: rgba(128, 128, 128, 0.5);
 }
 .container-pcourse .container-listOfVideos button h3:hover {
   cursor: pointer;
@@ -593,6 +629,7 @@ pre {
 
 /*   Dashboard Styles */
 .dashboard-container {
+  overflow: hidden;
   display: flex;
 }
 .dashboard-container a,
@@ -817,7 +854,9 @@ ul li {
 }
 
 h2 {
-  color: #ea5d61;
+  color: navy;
+  line-height: 1;
+  margin-top: 5px;
   font-weight: 500;
   text-align: center;
   letter-spacing: 0.1em;

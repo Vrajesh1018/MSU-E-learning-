@@ -48,6 +48,10 @@
       border-radius: 0.4rem;
       display: none;
       z-index: 1;
+      background-color: white;
+      ul{
+        list-style: none;
+      }
     }
   }
   .courses {
@@ -93,11 +97,15 @@
     display: none;
   }
   &.scrolled {
+    .scrolled-profile{
+      color: white;
+    }
     background-color: $primary-color !important;
     transition: background-color 200ms linear;
     h2 > a {
       color: white !important;
     }
+
     .nav-links-ul > li > a {
       color: white !important;
     }

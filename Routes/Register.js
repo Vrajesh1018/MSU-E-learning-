@@ -1,39 +1,76 @@
 const router = require('express').Router(); 
 
-const axios = require("axios");
+// const axios = require("axios");
+// const passport = require('passport');
+// const Student = require("../controller/studentController");
+
+const {passport,Student} = require("../middleware/authentication");
 
 // Register Route
+
 router.get("/", (req, res) => {
-  res.sendFile(__dirname + "/register.html");
+
+  if(req.isAuthenticated()){
+    res.render("login",{});
+  }
+  else{
+    res.render("home",{});
+
+  }
+
+  // if (isAuthenticate) res.render("login", {});
+  // else res.render("home", {});
 });
 
+router.post("/", (request, response) => {
+  const email = request.body.emailSignIn;
+  const password = request.body.passSignIn;
 
-router.post("/", (req, res) => {
-  console.log("Hii I Am in /register post ..");
-  console.log(req.body.registerPrn);
+  USERMAIL = request.body.emailSignIn;
 
-  //console.log(req.body);
+  
+  Student.register({Email:email},password,function(err,student){
+    if(err){
+      response.redirect("/");
+    }
+    else{
 
-  //USERMAIL = req.body.registerEmail;
+      passport.authenticate("local")(req,res,function(){
+        res.redirect("/");
+      });
+
+    }
+  })
 
 
+
+  /*
   axios
-    .post("http://localhost:4000/api", {
-      prn: req.body.registerPrn,
-      mail: req.body.registerEmail,
-      password: req.body.registerPassword,
-      name: req.body.registerName
+    .post("http://localhost:4000/api/foundOne", {
+      email: request.body.emailSignIn,
+      pass: request.body.passSignIn,
     })
-    .then(function (response) {
-      // console.log(response);
-      console.log("JSON OBJECT send sucessfully to api ");
+
+    .then((res) => {
+      console.log("I am from response SignIn");
+      console.log(res.data);
+      isAuthenticate = res.data;
+
+      if (isAuthenticate) {
+        response.render("login", {});
+        // response.redirect("/");
+      } else {
+        response.render("home", {});
+        response.send("Authetication failled !!!");
+      }
     })
-    .catch(function (error) {
-      console.log("I am from catch /api");
-      console.log(error);
+
+    .catch((err) => {
+      console.log("I am from catch");
+      console.log(err);
     });
 
-  res.redirect("/");
+    */
 });
 
 module.exports = router;

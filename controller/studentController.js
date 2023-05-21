@@ -11,9 +11,11 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 
-mongoose.connect("mongodb://127.0.0.1:27017/student");
+mongoose.connect("mongodb://0.0.0.0:27017/student");
 
 const Student = mongoose.model("student", studentSchema);
+
+
 
 
 app.route("/api")
@@ -211,4 +213,8 @@ app.post("/api/course/removeCourse",(req,res)=>{
 app.listen(4000, () => {
     console.log("Server has started on port 4000 for API");
 });
+
+
+//exporting student module so that we can use it in authentication.js middleware
+module.exports = Student;
 
