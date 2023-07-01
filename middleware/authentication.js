@@ -1,4 +1,4 @@
-/* const express = require("express");
+ const express = require("express");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
@@ -39,5 +39,3 @@ module.exports = {
     passport,
     Student
 }
-
-*/

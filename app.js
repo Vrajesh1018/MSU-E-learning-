@@ -6,15 +6,12 @@ const axios = require("axios").default;
 const path = require("path");
 const courses = require("./Content/courses.js");
 const https = require("https");
-
+const session = require("express-session");
+// const passport = require("passport");
 
 
 
 const app = express();
-
-//******** ************** passport Authentication ************* */
-
-/*
 
 const {passport,Student} = require("./middleware/authentication");
 
@@ -22,16 +19,14 @@ const {passport,Student} = require("./middleware/authentication");
 app.use(session({
   secret: "our little secret.",
   resave: false,
-  saveUninitialized: false
-
+  saveUninitialized: false,
+  isAuthenticate:false,
+  usermail:"",
+  currentplaylistid:""
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-*/
-
-// **********************************************************************8
 
 
 var isAuthenticate = false;
@@ -55,9 +50,9 @@ var USERMAIL = "";  // when user registered in course then add details of that c
 
 
 
-// const homeRoute = require("./Routes/Home");
-// const myprofileRoute = require("./Routes/Myprofile");
-// const registerRoute = require("./Routes/Register");
+const homeRoute = require("./Routes/Home");
+const myprofileRoute = require("./Routes/Myprofile");
+const registerRoute = require("./Routes/Register");
 // const pcourseRoute = require("./Routes/Pcourse");
 // const videoRoute = require("./Routes/Video");
 // const courseRoute = require("./Routes/Course");
@@ -66,159 +61,21 @@ var USERMAIL = "";  // when user registered in course then add details of that c
 // middleware
 app.use(express.json());
 
-// app.use("/",homeRoute.router);
+app.use("/",homeRoute);
 // app.use("/courses/",courseRoute);
-// app.use("/myprofile",myprofileRoute);
+app.use("/myprofile",myprofileRoute);
 // app.use("/courses/:newCourse/pcourse/:itemId/student/:courseId",pcourseRoute);
-// app.use("/register",registerRoute);
+app.use("/register",registerRoute);
 // app.use("/video",videoRoute);
 
 
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-// Home route
-app.get("/", (req, res) => {
-  if (isAuthenticate) res.render("login", {});
-  else res.render("home", {});
-});
-
-app.post("/", (request, response) => {
-  const email = request.body.emailSignIn;
-  const pass = request.body.passSignIn;
-
-  USERMAIL = request.body.emailSignIn;
-
-  
-
-  axios
-    .post("http://localhost:4000/api/foundOne", {
-      email: request.body.emailSignIn,
-      pass: request.body.passSignIn,
-    })
-
-    .then((res) => {
-      console.log("I am from response SignIn");
-      console.log(res.data);
-      isAuthenticate = res.data;
-
-      if (isAuthenticate) {
-        response.render("login", {});
-        // response.redirect("/");
-      } else {
-        response.render("home", {});
-        response.send("Authetication failled !!!");
-      }
-    })
-
-    .catch((err) => {
-      console.log("I am from catch");
-      console.log(err);
-    });
-});
-
-
-///////////////////////////
-
-
-// My Profile route get request
-app.get("/myprofile", (req, response) => {
-
-  let userCourseDetails = "";
-
-
-  if (isAuthenticate) {
-    console.log(USERMAIL);
-
-    axios
-      .post("http://localhost:4000/api/course/foundOne", {
-        mail: USERMAIL,
-      })
-
-      .then((res) => {
-
-        userCourseDetails = res.data.Courses;
-
-        response.render("dashboard", { courseArr: userCourseDetails, totalBranches: courses.length });
-
-      })
-      .catch((err) => {
-        console.log("I am from catch");
-        console.log(err);
-      });
-  } else response.redirect("/");
-});
-
-// when user take out from the course then it make post request to the /myprofile route
-app.post("/myprofile", (req, response) => {
-
-  //console.log("I am from post request of /myprofile");
-  //console.log(req.body);
-
-  axios.post("http://localhost:4000/api/course/removeCourse", {
-    mail: USERMAIL,
-    cardId: req.body.extra_submit_param_cardId,
-    itemId: req.body.extra_submit_param_itemId
-  })
-
-    .then((res) => {
-      console.log(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-
-  // Again redirect back to /myprofile so it's work like refresh the page and course has been removed.
-  response.redirect("/myprofile");
-});
-
 app.get("/logout", (req, res) => {
-  isAuthenticate = false;
+  req.session.isAuthenticate=false;
   res.redirect("/");
 });
 
 
-// Register Route
-app.get("/register", (req, res) => {
-
-  res.render("register");
-  //res.sendFile(__dirname + "/register.html");
-});
-
-
-app.post("/register", (req, res) => {
-  console.log("Hii I Am in /register post ..");
-  console.log(req.body.registerPrn);
-
-  //console.log(req.body);
-
-  USERMAIL = req.body.registerEmail;
-
-  axios
-    .post("http://localhost:4000/api", {
-      prn: req.body.registerPrn,
-      mail: req.body.registerEmail,
-      password: req.body.registerPassword,
-      name: req.body.registerName,
-    })
-    .then(function (response) {
-      // console.log(response);
-      console.log("JSON OBJECT send sucessfully to api ");
-
-      isAuthenticate = true;   //check 123...
-
-      // res.redirect("/");
-      res.render("login");
-
-    })
-    .catch(function (error) {
-      console.log("I am from catch /api");
-      console.log(error);
-    });
-
-});
 
 // Courses Route get request
 app.get("/courses/:newCourse", (req, res) => {
@@ -267,6 +124,8 @@ app.post("/courses/:newCourse", (req, res) => {
 
   console.log(itemid);
   console.log(cardId);
+
+  console.log(req.session.usermail);
 
   axios
     .post("http://localhost:4000/api/course", {
@@ -437,10 +296,6 @@ app.post("/courses/:newCourse/pcourse/:itemId/student/:courseId", (req, res) => 
 app.post("/video", (req, res) => {
   //console.log(req.body);
 });
-
-// });
-
-
 
 app.listen(3000, () => {
   console.log("server has started on port 3000");

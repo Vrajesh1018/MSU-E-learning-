@@ -1,35 +1,34 @@
 const router = require('express').Router(); 
-
-var isAuthenticate = require("./Home").isAuthenticate;
+const axios = require('axios');
+const courses = require("../Content/courses.js");
 
 
 // My Profile route get request
 router.get("/", (req, response) => {
-
   let userCourseDetails = "";
 
+    if(req.session.isAuthenticate){
+   
+    console.log("USER mail from session is : "+req.session.usermail);
 
-  if (isAuthenticate) {
-
-    console.log(USERMAIL);
-
-    axios.post("http://localhost:4000/api/course/foundOne", {
-      mail: USERMAIL
-    })
+    axios
+      .post("http://localhost:4000/api/course/foundOne", {
+        mail: req.session.usermail,
+      })
 
       .then((res) => {
 
         userCourseDetails = res.data.Courses;
 
-        response.render("dashboard", { courseArr: userCourseDetails });
+        console.log(userCourseDetails);
+
+        response.render("dashboard", { courseArr: userCourseDetails, totalBranches: courses.length });
 
       })
       .catch((err) => {
         console.log("I am from catch");
         console.log(err);
-      })
-
-
+      });
   } else response.redirect("/");
 });
 
@@ -37,12 +36,11 @@ router.get("/", (req, response) => {
 //when user take out from the course then it make post request to the / route
 router.post("/", (req, response) => {
 
-  console.log("I am from post request of /myprofile");
-  console.log(req.body);
-
+  console.log(req.session.usermail);
   axios.post("http://localhost:4000/api/course/removeCourse", {
-    mail: USERMAIL,
-    cardId: req.body.extra_submit_param_cardId
+    mail: req.session.usermail,
+    cardId: req.body.extra_submit_param_cardId,
+    itemId: req.body.extra_submit_param_itemId
   })
 
     .then((res) => {
@@ -51,7 +49,6 @@ router.post("/", (req, response) => {
     .catch((err) => {
       console.log(err);
     });
-
 
   // Again redirect back to /myprofile so it's work like refresh the page and course has been removed.
   response.redirect("/myprofile");
