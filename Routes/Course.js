@@ -1,53 +1,39 @@
 const router = require('express').Router();
-
-var isAuthenticate = require("./Home").isAuthenticate;
-
-
-router.use(function(req,res,next){
-
-  console.log(req.url);
-  console.log(isAuthenticate);
-  next();
-  
-});
-
-console.log("I am from courseRoute " + isAuthenticate);
+const courses = require("../Content/courses.js");
+const axios = require("axios");
+const https = require('https');
 
 // Courses Route get request
 router.route("/:newCourse")
    
 
   .get((req, res) => {
-  if (isAuthenticate) {
+    if(req.session.isAuthenticate){
 
-    let newCourse = req.params.newCourse;
-    //    res.sendFile(path);
-
-    let courseDetails;
-    console.log("Value of new Course is : " + newCourse);
-
-    courses.forEach((element) => {
-
-      //console.log(element.courseName);
-
-      // string1.localeCompare(string2) == if both are equal then returns 0 and if if they are equal then add courses.items to it.
-      if (!element.courseName.localeCompare(newCourse))
-        courseDetails = element.items;
-    });
-
-    res.render("coursesTemplate", {
-      courseArr: courseDetails,
-      courseName: newCourse,
-    });
-
-  }
-
-
-  else {
-    res.redirect("/");
-  }
-
-
+      let newCourse = req.params.newCourse;
+      //    res.sendFile(path);
+  
+      let courseDetails;
+      console.log("Value of new Course is : " + newCourse);
+  
+      courses.forEach((element) => {
+        //console.log(element.courseName);
+  
+        // string1.localeCompare(string2) == if both are equal then returns 0 and if if they are equal then add courses.items to it.
+        if (!element.courseName.localeCompare(newCourse))
+          courseDetails = element.items;
+      });
+  
+      res.render("coursesTemplate", {
+        courseArr: courseDetails,
+        courseName: newCourse,
+      });
+  
+    }
+    else {
+      res.redirect("/");
+    }
+  
 })
 
 // course Route post request when user registerd for course
@@ -55,9 +41,7 @@ router.route("/:newCourse")
 
   let courseName = req.params.newCourse;
 
-
   // console.log(req.body);
-
 
   let itemid = req.body.extra_submit_param_itemid;
   let cardId = req.body.extra_submit_param_cardId;
@@ -65,34 +49,150 @@ router.route("/:newCourse")
   let imgurl = req.body.extra_submit_param_imgurl;
   let author = req.body.extra_submit_param_author;
 
-
-  console.log("value of user mail is : " + USERMAIL);
+  //console.log("value of user mail is : " + USERMAIL);
 
   console.log(itemid);
   console.log(cardId);
 
-  axios.post("http://localhost:4000/api/course", {
-    courseName: courseName,
-    itemid: itemid,
-    cardId: cardId,
-    mail: USERMAIL,
-    cardTitle: carTitle,
-    imgurl: imgurl,
-    author: author
+  console.log(req.session.usermail);
 
-  }).then(function (response) {
+  axios
+    .post("http://localhost:4000/api/course", {
+      courseName: courseName,
+      itemid: itemid,
+      cardId: cardId,
+      mail: req.session.usermail,
+      cardTitle: carTitle,
+      imgurl: imgurl,
+      author: author,
+    })
+    .then(function (response) {
+      //console.log("from I am from axios post");
+      //console.log(response);
+    })
+    .catch(function (err) {
+      console.log("I am from catch /api");
+      console.log(err);
+    });
 
-    //console.log("from I am from axios post");
-    //console.log(response);
+    let videoUrl = "/courses/"+courseName+"/pcourse/"+itemid+"/student/"+cardId;
 
-  }).catch(function (err) {
-    console.log("I am from catch /api");
-    console.log(err);
-  })
+  res.redirect(videoUrl);
+});
 
-  res.redirect("/courses/" + courseName);
+
+router.route("/:newCourse/pcourse/:itemId/student/:courseId")
+
+.get((req,res)=>{
+
+  let courseName = req.params.newCourse;
+    let itemId = req.params.itemId;
+    let courseId = req.params.courseId; // courseId === cardId
+  // console.log(req.body);
+    let jsonObjectBody = "";
+  
+    let playlistId = "";
+  
+    courses.forEach((ele) => {
+      // This means we find the object of particular course ex. CSE.
+      if (!ele.courseName.localeCompare(courseName)) {
+        ele.items.forEach((e) => {
+          // That means we got is it of which domain
+          if (e.itemid == itemId) {
+            e.cardlist.forEach((element) => {
+              if (element.cardId == courseId) {
+                // here we get the exact object of carList which contain details;
+                playlistId = element.playlistId;
+  
+                CURRENTPLAYLISTID = playlistId;
+  
+                // console.log(element);
+              }
+            });
+          }
+        });
+      }
+    });
+  
+    let playlistURL =
+      "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
+      playlistId +
+      "&key=" +
+      process.env.API_KEY;
+  
+    https.get(playlistURL, (response) => {
+      //Intialise our JSON object
+      jsonObjectBody = "";
+  
+      response.on("data", (chunk) => {
+        jsonObjectBody += chunk;
+      });
+  
+      response.on("end", () => {
+        let jsonObject = JSON.parse(jsonObjectBody);
+  
+        // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
+        let nextPageToken = jsonObject.nextPageToken;
+  
+        let itemLength = jsonObject.items.length;
+  
+        res.render("Pcourse", {
+          videoId: jsonObject.items[0].snippet.resourceId.videoId,
+          itemsArray: jsonObject.items,
+          courseName: courseName,
+          courseId: courseId,
+          itemId: itemId,
+        });
+  
+  
+      });
+    });
+
+})
+
+.post((req,res)=>{
+
+  let videoId = req.body.extra_submit_param_videoId;
+  let courseName = req.body.extra_submit_param_courseName;
+  let courseId = req.body.extra_submit_param_courseId;
+  let itemId = req.params.itemId;
+
+  let playlistURL =
+    "https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=100&playlistId=" +
+    CURRENTPLAYLISTID +
+    "&key=" +
+    process.env.API_KEY;
+
+  https.get(playlistURL, (response) => {
+    //Intialise our JSON object
+    jsonObjectBody = "";
+
+    response.on("data", (chunk) => {
+      jsonObjectBody += chunk;
+    });
+
+    response.on("end", () => {
+      let jsonObject = JSON.parse(jsonObjectBody);
+
+      // If no of videos are more than 50 then the YT api will provide it in no Of pages so to navigate throgh next page we requied nextPageToken ..
+      let nextPageToken = jsonObject.nextPageToken;
+
+      let itemLength = jsonObject.items.length;
+
+      res.render("Pcourse", {
+        videoId: videoId,
+        itemsArray: jsonObject.items,
+        courseName: courseName,
+        courseId: courseId,
+        itemId: itemId,
+      });
+
+    });
+  });
+
 
 });
+
 
 
 
