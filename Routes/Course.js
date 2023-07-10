@@ -85,6 +85,8 @@ router.route("/:newCourse/pcourse/:itemId/student/:courseId")
 
 .get((req,res)=>{
 
+  if(req.session.isAuthenticate){
+
   let courseName = req.params.newCourse;
     let itemId = req.params.itemId;
     let courseId = req.params.courseId; // courseId === cardId
@@ -148,10 +150,17 @@ router.route("/:newCourse/pcourse/:itemId/student/:courseId")
       });
     });
 
+  }
+  else{
+    res.redirect("/");
+  
+  }
+
 })
 
 .post((req,res)=>{
 
+  if(req.session.isAuthenticate){
   let videoId = req.body.extra_submit_param_videoId;
   let courseName = req.body.extra_submit_param_courseName;
   let courseId = req.body.extra_submit_param_courseId;
@@ -189,6 +198,11 @@ router.route("/:newCourse/pcourse/:itemId/student/:courseId")
 
     });
   });
+
+}
+else{
+  res.redirect("/");
+}
 
 
 });

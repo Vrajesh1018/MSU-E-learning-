@@ -20,8 +20,6 @@ router.get("/", (req, response) => {
 
         userCourseDetails = res.data.Courses;
 
-        console.log(userCourseDetails);
-
         response.render("dashboard", { courseArr: userCourseDetails, totalBranches: courses.length });
 
       })
